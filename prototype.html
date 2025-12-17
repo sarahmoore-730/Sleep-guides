@@ -203,13 +203,37 @@
       padding: var(--space-md) var(--space-md);
       padding-bottom: 0;
     }
+    .recommended-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-sm);
+    }
     .recommended-label {
       font-size: 12px;
       font-weight: 600;
       color: var(--color-text-muted);
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      margin-bottom: var(--space-sm);
+    }
+    .recommended-dismiss {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: transparent;
+      border: none;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      border-radius: 50%;
+      transition: all 0.2s ease;
+      margin: -4px;
+    }
+    .recommended-dismiss:hover,
+    .recommended-dismiss:active {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--color-text-primary);
     }
     .recommended-card {
       background: linear-gradient(135deg, var(--color-teal) 0%, #14b8a6 100%);
@@ -442,6 +466,26 @@
     .lesson-body p {
       margin-bottom: var(--space-md);
     }
+    .lesson-body h2 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin: var(--space-lg) 0 var(--space-md) 0;
+    }
+    .lesson-body h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin: var(--space-md) 0 var(--space-sm) 0;
+    }
+    .lesson-body ul, .lesson-body ol {
+      margin: var(--space-md) 0;
+      padding-left: var(--space-lg);
+    }
+    .lesson-body li {
+      margin-bottom: var(--space-sm);
+      line-height: 1.6;
+    }
     .lesson-tip {
       background-color: var(--color-card-bg);
       border-left: 3px solid var(--color-teal);
@@ -460,6 +504,432 @@
       color: var(--color-text-primary);
       line-height: 1.5;
     }
+    .lesson-strategy {
+      background: linear-gradient(135deg, rgba(45, 212, 191, 0.15) 0%, rgba(45, 212, 191, 0.05) 100%);
+      border: 1px solid rgba(45, 212, 191, 0.3);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      margin: var(--space-lg) 0;
+    }
+    .lesson-strategy-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--color-teal);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: var(--space-sm);
+    }
+    .lesson-strategy-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-sm);
+    }
+    .lesson-strategy-text {
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+    .trying-this-toggle {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-top: var(--space-md);
+      padding-top: var(--space-md);
+      border-top: 1px solid rgba(45, 212, 191, 0.2);
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .trying-this-checkbox {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      border: 2px solid rgba(45, 212, 191, 0.5);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+    .trying-this-checkbox.checked {
+      background: var(--color-teal);
+      border-color: var(--color-teal);
+    }
+    .trying-this-checkbox svg {
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .trying-this-checkbox.checked svg {
+      opacity: 1;
+    }
+    .trying-this-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      transition: color 0.2s ease;
+    }
+    .trying-this-toggle:hover .trying-this-label,
+    .trying-this-toggle.active .trying-this-label {
+      color: var(--color-teal);
+    }
+    .trying-this-toggle.active .trying-this-label {
+      color: var(--color-text-primary);
+    }
+
+    /* My Strategies Section */
+    .my-strategies-section {
+      padding: var(--space-md);
+      padding-bottom: 0;
+    }
+    .my-strategies-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-sm);
+    }
+    .my-strategies-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .my-strategies-count {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-teal);
+      background: rgba(45, 212, 191, 0.15);
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+    }
+    .my-strategies-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .strategy-card {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-md);
+      background: linear-gradient(135deg, rgba(45, 212, 191, 0.12) 0%, rgba(45, 212, 191, 0.04) 100%);
+      border: 1px solid rgba(45, 212, 191, 0.25);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+      font-family: var(--font-family);
+      width: 100%;
+    }
+    .strategy-card:active {
+      transform: scale(0.98);
+      background: linear-gradient(135deg, rgba(45, 212, 191, 0.2) 0%, rgba(45, 212, 191, 0.08) 100%);
+    }
+    .strategy-card-check {
+      width: 28px;
+      height: 28px;
+      background: var(--color-teal);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .strategy-card-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .strategy-card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin: 0;
+      line-height: 1.3;
+    }
+    .strategy-card-source {
+      font-size: 12px;
+      color: var(--color-text-muted);
+      margin-top: 2px;
+    }
+    .strategy-card-arrow {
+      color: var(--color-text-muted);
+      flex-shrink: 0;
+    }
+    .strategy-card-wrapper {
+      position: relative;
+      display: flex;
+      align-items: stretch;
+      gap: var(--space-xs);
+    }
+    .strategy-card-wrapper .strategy-card {
+      flex: 1;
+    }
+    .strategy-card-remove {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-md);
+      color: var(--color-text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+    .strategy-card-remove:hover,
+    .strategy-card-remove:active {
+      background: rgba(255, 100, 100, 0.15);
+      border-color: rgba(255, 100, 100, 0.3);
+      color: #ff6b6b;
+    }
+    .my-strategies-empty {
+      padding: var(--space-md);
+      text-align: center;
+      color: var(--color-text-muted);
+      font-size: 13px;
+      background: var(--color-card-bg);
+      border-radius: var(--radius-md);
+      border: 1px dashed var(--color-card-border);
+    }
+
+    /* Night Tracker */
+    .night-tracker {
+      background: linear-gradient(135deg, rgba(45, 212, 191, 0.15) 0%, rgba(45, 212, 191, 0.05) 100%);
+      border: 1px solid rgba(45, 212, 191, 0.3);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-lg);
+    }
+    .night-tracker-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-md);
+    }
+    .night-tracker-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+    .night-tracker-progress {
+      font-size: 12px;
+      color: var(--color-teal);
+      font-weight: 600;
+    }
+    .night-tracker-nights {
+      display: flex;
+      gap: var(--space-sm);
+      justify-content: space-between;
+    }
+    .night-tracker-night {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .night-tracker-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid rgba(45, 212, 191, 0.4);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .night-tracker-circle:active {
+      transform: scale(0.95);
+    }
+    .night-tracker-circle.completed {
+      background: var(--color-teal);
+      border-color: var(--color-teal);
+    }
+    .night-tracker-circle svg {
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .night-tracker-circle.completed svg {
+      opacity: 1;
+    }
+    .night-tracker-label {
+      font-size: 11px;
+      color: var(--color-text-muted);
+      font-weight: 500;
+    }
+    .night-tracker-night.completed .night-tracker-label {
+      color: var(--color-teal);
+    }
+    .night-tracker-message {
+      margin-top: var(--space-md);
+      padding-top: var(--space-md);
+      border-top: 1px solid rgba(45, 212, 191, 0.2);
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      text-align: center;
+    }
+    .night-tracker-message.complete {
+      color: var(--color-teal);
+      font-weight: 600;
+    }
+    .night-tracker.all-complete {
+      background: linear-gradient(135deg, rgba(45, 212, 191, 0.25) 0%, rgba(255, 215, 0, 0.15) 100%);
+      border-color: rgba(45, 212, 191, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+    .night-tracker-number {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(45, 212, 191, 0.6);
+    }
+    .celebration-star {
+      display: inline-block;
+      margin: 0 4px;
+      animation: starPulse 1s ease-in-out infinite;
+    }
+    @keyframes starPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+    .confetti-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .confetti-piece {
+      position: absolute;
+      top: -10px;
+      border-radius: 2px;
+      animation: confettiFall linear forwards;
+    }
+    @keyframes confettiFall {
+      0% {
+        top: -10px;
+        opacity: 1;
+        transform: translateX(0) rotate(0deg);
+      }
+      100% {
+        top: 100%;
+        opacity: 0;
+        transform: translateX(calc(-30px + 60px * var(--random, 0.5))) rotate(720deg);
+      }
+    }
+
+    /* Check-in Bottom Sheet */
+    .checkin-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 1000;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .checkin-sheet {
+      background: var(--color-navy-light);
+      border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+      padding: var(--space-md) var(--space-lg) calc(var(--safe-area-bottom) + var(--space-lg));
+      width: 100%;
+      max-width: 430px;
+      animation: slideUp 0.3s ease;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+    .checkin-handle {
+      width: 36px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 2px;
+      margin: 0 auto var(--space-lg);
+    }
+    .checkin-header {
+      text-align: center;
+      margin-bottom: var(--space-lg);
+    }
+    .checkin-emoji {
+      font-size: 40px;
+      display: block;
+      margin-bottom: var(--space-sm);
+    }
+    .checkin-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      margin: 0 0 var(--space-xs);
+    }
+    .checkin-subtitle {
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      margin: 0;
+    }
+    .checkin-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+    }
+    .checkin-option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: var(--space-md);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: var(--font-family);
+    }
+    .checkin-option:active {
+      background: rgba(45, 212, 191, 0.15);
+      border-color: rgba(45, 212, 191, 0.3);
+      transform: scale(0.98);
+    }
+    .checkin-option-emoji {
+      font-size: 28px;
+    }
+    .checkin-option-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+    .checkin-dismiss {
+      width: 100%;
+      padding: var(--space-md);
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-full);
+      color: var(--color-text-secondary);
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .checkin-dismiss:active {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
     .lesson-footer {
       padding: var(--space-md) var(--space-lg) calc(var(--safe-area-bottom) + var(--space-lg));
       border-top: 1px solid var(--color-card-border);
@@ -499,18 +969,28 @@
       margin-bottom: var(--space-md);
     }
 
+    /* Browse Section */
+    .browse-section {
+      margin-top: var(--space-md);
+    }
+    .browse-section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 20%, rgba(255,255,255,0.15) 80%, transparent 100%);
+      margin: 0 var(--space-md) var(--space-sm);
+    }
+
     /* Browse Tabs */
     .browse-tabs {
       display: flex;
-      gap: var(--space-sm);
-      padding: var(--space-md);
+      gap: var(--space-xs);
+      padding: var(--space-xs);
       background-color: var(--color-navy-light);
-      border-radius: var(--radius-lg);
-      margin: var(--space-md);
+      border-radius: var(--radius-md);
+      margin: var(--space-sm) var(--space-md);
     }
     .browse-tab {
       flex: 1;
-      padding: var(--space-md) var(--space-sm);
+      padding: var(--space-sm) var(--space-xs);
       border: none;
       border-radius: var(--radius-md);
       background-color: transparent;
@@ -757,6 +1237,50 @@
       padding: var(--space-xxl) var(--space-md);
       color: var(--color-text-muted);
     }
+
+    /* Loading States */
+    .loading-spinner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-xxl) var(--space-md);
+    }
+    .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid var(--color-card-border);
+      border-top-color: var(--color-teal);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .loading-text {
+      margin-left: var(--space-md);
+      color: var(--color-text-secondary);
+      font-size: 14px;
+    }
+    .error-message {
+      text-align: center;
+      padding: var(--space-lg);
+      color: #ef4444;
+      font-size: 14px;
+    }
+    .content-source-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      background-color: var(--color-teal);
+      color: var(--color-text-dark);
+      font-size: 10px;
+      font-weight: 600;
+      border-radius: var(--radius-full);
+      margin-left: var(--space-sm);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
   </style>
 </head>
 <body>
@@ -765,7 +1289,142 @@
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    const { useState, useMemo } = React;
+    const { useState, useMemo, useEffect } = React;
+
+    // Contentful Configuration
+    const CONTENTFUL_SPACE_ID = '5dw1jlex3mww';
+    const CONTENTFUL_ACCESS_TOKEN = 'HGDPBJr9kMNeFuiTwDZN4Ve6h8r-WgFtxzSOIrXp1QQ';
+    const CONTENTFUL_BASE_URL = `https://cdn.contentful.com/spaces/${CONTENTFUL_SPACE_ID}/environments/master`;
+
+    // Contentful API Functions
+    async function fetchFromContentful(endpoint, params = {}) {
+      const url = new URL(`${CONTENTFUL_BASE_URL}${endpoint}`);
+      url.searchParams.set('access_token', CONTENTFUL_ACCESS_TOKEN);
+      Object.entries(params).forEach(([key, value]) => url.searchParams.set(key, value));
+
+      const response = await fetch(url.toString());
+      if (!response.ok) throw new Error(`Contentful API error: ${response.status}`);
+      return response.json();
+    }
+
+    // Helper to convert Contentful Rich Text to simple HTML
+    function richTextToHtml(richText) {
+      if (!richText || !richText.content) return '';
+
+      return richText.content.map(node => {
+        if (node.nodeType === 'paragraph') {
+          const text = node.content?.map(c => c.value || '').join('') || '';
+          return `<p>${text}</p>`;
+        }
+        if (node.nodeType === 'heading-2') {
+          const text = node.content?.map(c => c.value || '').join('') || '';
+          return `<h2>${text}</h2>`;
+        }
+        if (node.nodeType === 'heading-3') {
+          const text = node.content?.map(c => c.value || '').join('') || '';
+          return `<h3>${text}</h3>`;
+        }
+        if (node.nodeType === 'unordered-list') {
+          const items = node.content?.map(li => {
+            const text = li.content?.[0]?.content?.map(c => c.value || '').join('') || '';
+            return `<li>${text}</li>`;
+          }).join('') || '';
+          return `<ul>${items}</ul>`;
+        }
+        if (node.nodeType === 'ordered-list') {
+          const items = node.content?.map(li => {
+            const text = li.content?.[0]?.content?.map(c => c.value || '').join('') || '';
+            return `<li>${text}</li>`;
+          }).join('') || '';
+          return `<ol>${items}</ol>`;
+        }
+        return '';
+      }).join('');
+    }
+
+    async function fetchCourses() {
+      const data = await fetchFromContentful('/entries', {
+        content_type: 'courses',
+        include: '10'  // Deep nesting to get courses → chapters → lessons
+      });
+
+      // Create a map of included entries for resolving links
+      const includedMap = {};
+      if (data.includes?.Entry) {
+        data.includes.Entry.forEach(entry => {
+          includedMap[entry.sys.id] = entry;
+        });
+      }
+
+      return data.items.map(course => {
+        const fields = course.fields;
+
+        // Resolve chapter references and their lessons
+        const chapters = (fields.chapters || []).map((chapterRef, index) => {
+          const chapter = includedMap[chapterRef.sys.id];
+          if (!chapter) return { id: index + 1, title: 'Chapter', duration: 5, lessons: [] };
+
+          // Resolve lessons within this chapter
+          const lessons = (chapter.fields.lessons || []).map((lessonRef, lessonIndex) => {
+            const lesson = includedMap[lessonRef.sys.id];
+            if (!lesson) return { id: lessonIndex + 1, title: 'Lesson', content: '' };
+            return {
+              id: lessonIndex + 1,
+              title: lesson.fields.title || 'Untitled Lesson',
+              slug: lesson.fields.slug,
+              preamble: richTextToHtml(lesson.fields.preamble),
+              content: richTextToHtml(lesson.fields.lessonContent),
+            };
+          });
+
+          return {
+            id: index + 1,
+            title: chapter.fields.title || 'Untitled Chapter',
+            subtitle: chapter.fields.subtitle || '',
+            description: chapter.fields.description || '',
+            duration: chapter.fields.duration || 5,
+            slug: chapter.fields.slug,
+            lessons: lessons
+          };
+        });
+
+        // Determine age category from title
+        let categoryId = 'topic-general';
+        let category = 'topic';
+        const title = fields.title?.toLowerCase() || '';
+
+        if (title.includes('0-3 month') || title.includes('0-3m')) {
+          categoryId = '0-3m'; category = 'age';
+        } else if (title.includes('4-5 month') || title.includes('4-5m') || title.includes('4 month')) {
+          categoryId = '4-5m'; category = 'age';
+        } else if (title.includes('6-17 month') || title.includes('6-17m') || title.includes('6-12') || title.includes('6 month')) {
+          categoryId = '6-17m'; category = 'age';
+        } else if (title.includes('18 month') || title.includes('18m') || title.includes('toddler')) {
+          categoryId = '18m-3y'; category = 'age';
+        } else if (title.includes('3-5') || title.includes('preschool')) {
+          categoryId = '3-5y'; category = 'age';
+        } else if (title.includes('sleep training')) {
+          categoryId = 'sleep-training'; category = 'topic';
+        } else if (title.includes('regression')) {
+          categoryId = 'sleep-regressions'; category = 'topic';
+        } else if (title.includes('night')) {
+          categoryId = 'night-wakings'; category = 'topic';
+        }
+
+        return {
+          id: course.sys.id,
+          slug: fields.slug,
+          title: fields.title || 'Untitled',
+          description: fields.description || '',
+          category,
+          categoryId,
+          chapters: chapters.length,
+          duration: chapters.reduce((sum, ch) => sum + (ch.duration || 0), 0),
+          chapterList: chapters,
+          fromContentful: true
+        };
+      });
+    }
 
     // Data
     const BROWSE_MODES = { AGE: 'age', TOPIC: 'topic', SEASONAL: 'seasonal' };
@@ -779,6 +1438,7 @@
     ];
 
     const TOPICS = [
+      { id: 'sleep-training', label: 'Sleep training', icon: '💪' },
       { id: 'bedtime-battles', label: 'Bedtime battles', icon: '🌙' },
       { id: 'early-waking', label: 'Early waking', icon: '🌅' },
       { id: 'nap-transitions', label: 'Nap transitions', icon: '😴' },
@@ -793,58 +1453,8 @@
       { id: 'new-sibling', label: 'New sibling', icon: '👶' },
     ];
 
-    const GUIDES = [
-      // Age: 0-3m
-      { id: 'newborn-sleep-foundations', title: 'Newborn Sleep Foundations', description: 'Everything you need to know about sleep in the first 3 months', category: 'age', categoryId: '0-3m', chapters: 6, duration: 25, chapterList: [
-        { id: 1, title: 'Understanding newborn sleep', duration: 4 },
-        { id: 2, title: 'Safe sleep basics', duration: 5 },
-        { id: 3, title: 'Day vs night confusion', duration: 4 },
-        { id: 4, title: 'Feeding and sleep connection', duration: 4 },
-        { id: 5, title: 'Creating a sleep-friendly environment', duration: 4 },
-        { id: 6, title: 'Realistic expectations', duration: 4 },
-      ]},
-      { id: 'soothing-techniques', title: 'Soothing Techniques for Newborns', description: 'Gentle ways to help your newborn settle and sleep', category: 'age', categoryId: '0-3m', chapters: 5, duration: 18, chapterList: [
-        { id: 1, title: "The 5 S's method", duration: 4 },
-        { id: 2, title: 'Swaddling basics', duration: 3 },
-        { id: 3, title: 'White noise and shushing', duration: 3 },
-        { id: 4, title: 'Motion and holding', duration: 4 },
-        { id: 5, title: 'When nothing works', duration: 4 },
-      ]},
-      // Age: 4-5m
-      { id: 'sleep-training-intro', title: 'Introduction to Sleep Training', description: 'Gentle methods to help your baby learn independent sleep', category: 'age', categoryId: '4-5m', chapters: 7, duration: 30, chapterList: [
-        { id: 1, title: 'Is your baby ready?', duration: 4 },
-        { id: 2, title: 'Sleep training methods overview', duration: 5 },
-        { id: 3, title: 'The pick up/put down method', duration: 5 },
-        { id: 4, title: 'Chair method explained', duration: 4 },
-        { id: 5, title: 'Ferber method basics', duration: 4 },
-        { id: 6, title: 'Creating your plan', duration: 4 },
-        { id: 7, title: 'Troubleshooting common issues', duration: 4 },
-      ]},
-      { id: '4-month-regression', title: 'Surviving the 4-Month Regression', description: 'Why it happens and how to get through it', category: 'age', categoryId: '4-5m', chapters: 5, duration: 20, chapterList: [
-        { id: 1, title: 'What is the 4-month regression?', duration: 4 },
-        { id: 2, title: 'Signs your baby is going through it', duration: 3 },
-        { id: 3, title: 'Survival strategies', duration: 5 },
-        { id: 4, title: 'Sleep associations to watch for', duration: 4 },
-        { id: 5, title: 'Coming out the other side', duration: 4 },
-      ]},
-      // Age: 6-17m
-      { id: 'dropping-night-feeds', title: 'Dropping Night Feeds', description: 'When and how to wean off nighttime feedings', category: 'age', categoryId: '6-17m', chapters: 5, duration: 22, chapterList: [
-        { id: 1, title: 'Signs baby is ready', duration: 4 },
-        { id: 2, title: 'Gradual reduction method', duration: 5 },
-        { id: 3, title: 'Cold turkey approach', duration: 4 },
-        { id: 4, title: 'Increasing daytime calories', duration: 5 },
-        { id: 5, title: 'Handling setbacks', duration: 4 },
-      ]},
-      // Age: 6-17m
-      { id: 'toddler-sleep-basics', title: 'Toddler Sleep Basics', description: 'Navigating sleep with your newly mobile toddler', category: 'age', categoryId: '6-17m', chapters: 6, duration: 24, chapterList: [
-        { id: 1, title: 'Sleep needs at this age', duration: 4 },
-        { id: 2, title: 'Ideal schedules', duration: 4 },
-        { id: 3, title: 'Separation anxiety and sleep', duration: 4 },
-        { id: 4, title: 'Keeping toddlers in cribs', duration: 4 },
-        { id: 5, title: 'Dealing with testing behaviors', duration: 4 },
-        { id: 6, title: 'Sleep environment updates', duration: 4 },
-      ]},
-      // Age: 18m-3y
+    // Sample data for 18m-3y age range
+    const SAMPLE_AGE_GUIDES = [
       { id: '18-month-regression', title: 'The 18-Month Sleep Regression', description: 'Understanding and surviving this challenging phase', category: 'age', categoryId: '18m-3y', chapters: 5, duration: 18, chapterList: [
         { id: 1, title: 'Why 18 months is tough', duration: 3 },
         { id: 2, title: 'Language explosion impact', duration: 4 },
@@ -852,7 +1462,6 @@
         { id: 4, title: 'Maintaining boundaries', duration: 4 },
         { id: 5, title: 'When to seek help', duration: 4 },
       ]},
-      // Age: 18m-3y
       { id: 'crib-to-bed', title: 'Crib to Bed Transition', description: 'Making the move to a big kid bed successfully', category: 'age', categoryId: '18m-3y', chapters: 6, duration: 22, chapterList: [
         { id: 1, title: 'When to make the switch', duration: 3 },
         { id: 2, title: 'Preparing your child', duration: 4 },
@@ -861,67 +1470,320 @@
         { id: 5, title: 'Handling curtain calls', duration: 4 },
         { id: 6, title: 'Staying consistent', duration: 3 },
       ]},
-      // Age: 3-5y
+      { id: 'toddler-night-fears', title: 'Conquering Toddler Night Fears', description: 'Help your toddler feel safe and secure at bedtime', category: 'age', categoryId: '18m-3y', chapters: 5, duration: 20, chapterList: [
+        { id: 1, title: 'Why fears develop at this age', duration: 4 },
+        { id: 2, title: 'Common fears and triggers', duration: 4 },
+        { id: 3, title: 'Validating without reinforcing', duration: 4 },
+        { id: 4, title: 'Comfort objects and routines', duration: 4 },
+        { id: 5, title: 'When fears need extra support', duration: 4 },
+      ]},
+      { id: 'dropping-the-nap', title: 'Dropping the Afternoon Nap', description: 'Navigate the transition from one nap to quiet time', category: 'age', categoryId: '18m-3y', chapters: 4, duration: 16, chapterList: [
+        { id: 1, title: 'Signs your toddler is ready', duration: 4 },
+        { id: 2, title: 'Gradual vs cold turkey', duration: 4 },
+        { id: 3, title: 'Adjusting bedtime', duration: 4 },
+        { id: 4, title: 'Quiet time alternatives', duration: 4 },
+      ]},
+      // 3-5 years age range
       { id: 'preschooler-bedtime', title: 'Preschooler Bedtime Mastery', description: 'Creating peaceful bedtimes with your 3-5 year old', category: 'age', categoryId: '3-5y', chapters: 5, duration: 20, chapterList: [
-        { id: 1, title: 'Understanding preschool sleep needs', duration: 4 },
-        { id: 2, title: 'Building an effective routine', duration: 4 },
-        { id: 3, title: 'Managing stall tactics', duration: 4 },
-        { id: 4, title: 'Nighttime fears and nightmares', duration: 4 },
-        { id: 5, title: 'Reward systems that work', duration: 4 },
+        { id: 1, title: 'Understanding preschool sleep needs', duration: 4, lessons: [
+          {
+            id: 1,
+            title: 'Understanding preschool sleep needs',
+            content: `
+              <p>Children ages 3-5 typically need 10-13 hours of sleep per day, including naps if they still take them. By age 5, most children have dropped their nap entirely.</p>
+              <p>At this age, your child's circadian rhythm is maturing, which means bedtime and wake time become more predictable. However, their active imaginations can make bedtime more challenging.</p>
+              <div class="lesson-strategy">
+                <div class="lesson-strategy-label">Strategy to Try</div>
+                <div class="lesson-strategy-title">The Sleep Window Sweet Spot</div>
+                <div class="lesson-strategy-text">Watch for signs of tiredness between 7-8pm. When you see eye rubbing, yawning, or decreased activity, that's the "sleep window." Starting your bedtime routine 30 minutes before this window helps your child fall asleep faster and sleep more soundly. Missing the window often leads to a "second wind" that makes bedtime much harder.</div>
+              </div>
+              <p>Keep a simple sleep log for a week to identify your child's natural sleep window. Once you find it, protect that time fiercely!</p>
+            `
+          }
+        ]},
+        { id: 2, title: 'Building an effective routine', duration: 4, lessons: [
+          {
+            id: 1,
+            title: 'Building an effective routine',
+            content: `
+              <p>A consistent bedtime routine signals to your child's brain that sleep is coming. The ideal routine is 20-30 minutes long and follows the same steps in the same order every night.</p>
+              <p>Good routines are calm, connected, and predictable. Avoid screens, roughhousing, or anything too stimulating in the hour before bed.</p>
+              <div class="lesson-strategy">
+                <div class="lesson-strategy-label">Strategy to Try</div>
+                <div class="lesson-strategy-title">The 4 B's Routine</div>
+                <div class="lesson-strategy-text">Follow this simple sequence every night: Bath (or wash up), Brush teeth, Books (2-3 stories), and Bed. The predictability helps your child's brain wind down automatically. Let your child have small choices within the routine ("Do you want the dinosaur pajamas or the rocket ones?") to reduce power struggles while keeping the structure intact.</div>
+              </div>
+              <p>Post a visual chart of the routine in your child's room. Many preschoolers love checking off each step!</p>
+            `
+          }
+        ]},
+        { id: 3, title: 'Managing stall tactics', duration: 4, lessons: [
+          {
+            id: 1,
+            title: 'Managing stall tactics',
+            content: `
+              <p>Preschoolers are masters of delay. "One more hug," "I need water," "I have to go potty again" — sound familiar? These stall tactics are completely normal and actually show your child's growing cognitive abilities.</p>
+              <p>The key is to anticipate these needs before they become excuses. Build them into your routine so there's nothing left to negotiate.</p>
+              <div class="lesson-strategy">
+                <div class="lesson-strategy-label">Strategy to Try</div>
+                <div class="lesson-strategy-title">The Bedtime Ticket System</div>
+                <div class="lesson-strategy-text">Give your child 2-3 "bedtime tickets" each night. Each ticket can be exchanged for one request after lights out (water, hug, quick question). Once the tickets are used, that's it until morning. This gives your child a sense of control while setting clear boundaries. Most kids start "saving" their tickets and eventually stop using them altogether!</div>
+              </div>
+              <p>Remember to stay calm and consistent. If you give in to endless requests one night, your child will try even harder the next. A boring, neutral response works best: "It's sleep time now. I love you. Goodnight."</p>
+            `
+          }
+        ]},
+        { id: 4, title: 'Nighttime fears and nightmares', duration: 4, lessons: [
+          {
+            id: 1,
+            title: 'Nighttime fears and nightmares',
+            content: `
+              <p>Nighttime fears peak between ages 3-6 as children's imaginations develop faster than their ability to distinguish fantasy from reality. Monsters, the dark, and being alone are common fears.</p>
+              <p>Take your child's fears seriously without reinforcing them. Dismissing fears ("There's no such thing as monsters!") often backfires. Instead, acknowledge the feeling while building confidence.</p>
+              <div class="lesson-strategy">
+                <div class="lesson-strategy-label">Strategy to Try</div>
+                <div class="lesson-strategy-title">Monster Spray & Brave Training</div>
+                <div class="lesson-strategy-text">Fill a spray bottle with water and a drop of lavender essential oil. Label it "Monster Spray" and let your child spray the room before bed. Then practice "brave thoughts" together: "My room is safe. Mom and Dad are nearby. I am brave." Pair this with a special stuffed animal designated as the "guardian" who watches over them. These rituals give children a sense of control over their fears.</div>
+              </div>
+              <p>If nightmares are frequent, review what your child watches and experiences during the day. Sometimes limiting scary content (even "kids' shows") can help significantly.</p>
+            `
+          }
+        ]},
+        { id: 5, title: 'Reward systems that work', duration: 4, lessons: [
+          {
+            id: 1,
+            title: 'Reward systems that work',
+            content: `
+              <p>Positive reinforcement is powerful with preschoolers. The key is making rewards immediate, specific, and attainable. Vague promises ("Be good at bedtime this week and we'll go to the park") rarely work.</p>
+              <p>Focus on rewarding specific behaviors rather than outcomes. Reward "staying in bed" rather than "sleeping well" since children can't control when they fall asleep.</p>
+              <div class="lesson-strategy">
+                <div class="lesson-strategy-label">Strategy to Try</div>
+                <div class="lesson-strategy-title">The Sticker Chart Sprint</div>
+                <div class="lesson-strategy-text">Create a simple chart with 5-7 spaces. Each morning after a successful bedtime (stayed in bed, no excessive callbacks), your child adds a sticker. When the chart is full, they earn a small reward — extra story time, choosing dinner, or a special activity. Keep the goal achievable: 5 stickers for younger preschoolers, 7 for older ones. Once the behavior is established (usually 3-4 weeks), you can phase out the chart.</div>
+              </div>
+              <p>Praise effort and progress, not perfection. "You stayed in bed even though it was hard. I'm so proud of you!" goes a long way.</p>
+            `
+          }
+        ]},
       ]},
-      // Age: 3-5y
       { id: 'school-ready-sleep', title: 'School-Ready Sleep Habits', description: 'Preparing sleep schedules for kindergarten', category: 'age', categoryId: '3-5y', chapters: 4, duration: 16, chapterList: [
-        { id: 1, title: 'Sleep needs for school success', duration: 4 },
-        { id: 2, title: 'Adjusting to early wake times', duration: 4 },
-        { id: 3, title: 'Weekend vs weekday schedules', duration: 4 },
-        { id: 4, title: 'Building independence', duration: 4 },
+        { id: 1, title: 'Sleep needs for school success', duration: 4, lessons: [
+          {
+            id: 1,
+            title: 'Sleep needs for school success',
+            content: `
+              <p>Well-rested children learn better, behave better, and handle emotions better. Studies show that even 30 minutes less sleep can impact a child's attention, memory, and mood the next day.</p>
+              <p>School-age children need 9-11 hours of sleep. If school starts at 8am and your child needs 20 minutes to get ready, work backwards to find the ideal bedtime.</p>
+              <div class="lesson-strategy">
+                <div class="lesson-strategy-label">Strategy to Try</div>
+                <div class="lesson-strategy-title">The Backwards Bedtime Calculator</div>
+                <div class="lesson-strategy-text">Start with when your child needs to wake up, add 15 minutes for falling asleep, then count back 10-11 hours. That's your target "lights out" time. If wake-up is 6:30am and your child needs 10.5 hours, lights out should be 7:45pm, which means starting the bedtime routine around 7:15pm. Write this schedule down and post it where everyone can see it.</div>
+              </div>
+              <p>Start adjusting to the school schedule 2-3 weeks before school begins — not the night before!</p>
+            `
+          }
+        ]},
+        { id: 2, title: 'Adjusting to early wake times', duration: 4, lessons: [
+          {
+            id: 1,
+            title: 'Adjusting to early wake times',
+            content: `
+              <p>If your child has been sleeping late during summer or preschool, the transition to early school mornings can be brutal. The key is gradual adjustment — sudden changes rarely stick.</p>
+              <p>Your child's internal clock takes time to shift. Rushing this process leads to overtired, cranky mornings for everyone.</p>
+              <div class="lesson-strategy">
+                <div class="lesson-strategy-label">Strategy to Try</div>
+                <div class="lesson-strategy-title">The 15-Minute Shift</div>
+                <div class="lesson-strategy-text">Move bedtime and wake time 15 minutes earlier every 2-3 days until you reach your goal. So if your child currently sleeps 8:30pm-7:30am but needs to sleep 7:30pm-6:30am, you'll need about 2 weeks to adjust. Use bright light in the morning (open curtains immediately) and dim lights in the evening to help reset their internal clock faster.</div>
+              </div>
+              <p>Be patient with this process. Some crankiness is normal during the adjustment period.</p>
+            `
+          }
+        ]},
+        { id: 3, title: 'Weekend vs weekday schedules', duration: 4, lessons: [
+          {
+            id: 1,
+            title: 'Weekend vs weekday schedules',
+            content: `
+              <p>It's tempting to let kids stay up late and sleep in on weekends, but this creates "social jet lag" — essentially putting your child through time zone changes every week.</p>
+              <p>Consistency is more important than you might think. Big schedule swings make Monday mornings miserable and can affect learning all week.</p>
+              <div class="lesson-strategy">
+                <div class="lesson-strategy-label">Strategy to Try</div>
+                <div class="lesson-strategy-title">The One-Hour Rule</div>
+                <div class="lesson-strategy-text">Allow no more than one hour difference between weekday and weekend sleep times. If your child sleeps 7:30pm-6:30am on school days, weekends should be no later than 8:30pm-7:30am. This small flexibility feels like a treat while keeping their internal clock stable. Save the late nights for special occasions, not every weekend.</div>
+              </div>
+              <p>If you do have a late night, get back on schedule the very next day rather than "catching up" with a late morning.</p>
+            `
+          }
+        ]},
+        { id: 4, title: 'Building independence', duration: 4, lessons: [
+          {
+            id: 1,
+            title: 'Building independence',
+            content: `
+              <p>As children head to school, they need to manage more of their own sleep routine. This builds confidence and makes mornings smoother for everyone.</p>
+              <p>Start transferring responsibility gradually. Children this age can learn to complete routine steps independently with the right tools and practice.</p>
+              <div class="lesson-strategy">
+                <div class="lesson-strategy-label">Strategy to Try</div>
+                <div class="lesson-strategy-title">The Ready-for-Bed Checklist</div>
+                <div class="lesson-strategy-text">Create a laminated checklist with pictures for non-readers: pajamas on, teeth brushed, clothes out for tomorrow, backpack packed, one toy in bed. Your child checks off each item independently. You only come in for the final tuck-in and story once everything is done. This builds responsibility while ensuring nothing is forgotten. Celebrate when they complete the list without reminders!</div>
+              </div>
+              <p>An OK-to-wake clock can also help independent kids know when it's acceptable to get up, reducing early morning wake-ups for you.</p>
+            `
+          }
+        ]},
       ]},
-      // Topic: Bedtime battles
-      { id: 'ending-bedtime-battles', title: 'Ending Bedtime Battles', description: 'Strategies to make bedtime peaceful again', category: 'topic', categoryId: 'bedtime-battles', chapters: 6, duration: 25, chapterList: [
-        { id: 1, title: 'Understanding why battles happen', duration: 4 },
-        { id: 2, title: 'The ideal bedtime routine', duration: 4 },
-        { id: 3, title: 'Setting clear boundaries', duration: 5 },
-        { id: 4, title: 'Positive reinforcement techniques', duration: 4 },
-        { id: 5, title: 'Handling meltdowns', duration: 4 },
-        { id: 6, title: 'Consistency is key', duration: 4 },
+      { id: 'night-terrors-sleepwalking', title: 'Night Terrors & Sleepwalking', description: 'Understanding and managing parasomnias in preschoolers', category: 'age', categoryId: '3-5y', chapters: 5, duration: 18, chapterList: [
+        { id: 1, title: 'What are parasomnias?', duration: 3, lessons: [
+          {
+            id: 1,
+            title: 'What are parasomnias?',
+            content: `
+              <p>Parasomnias are sleep disorders that involve unusual behaviors during sleep. In children, the most common are night terrors, sleepwalking, and sleep talking. They typically occur during the transition between deep sleep and lighter sleep stages.</p>
+              <p>The good news: most parasomnias are harmless and children outgrow them. They're more common when children are overtired, stressed, or have irregular sleep schedules.</p>
+              <div class="lesson-strategy">
+                <div class="lesson-strategy-label">Strategy to Try</div>
+                <div class="lesson-strategy-title">The Sleep Diary Detective</div>
+                <div class="lesson-strategy-text">Keep a log for two weeks noting: bedtime, wake time, any naps, and when episodes occur (note the time!). Look for patterns. Are episodes happening on nights after skipped naps? After late bedtimes? After busy/stressful days? Most parents discover a clear trigger they can address. Episodes usually occur 1-3 hours after falling asleep, during the first deep sleep cycle.</div>
+              </div>
+              <p>Understanding that your child isn't awake during these episodes — even if their eyes are open — helps you respond appropriately.</p>
+            `
+          }
+        ]},
+        { id: 2, title: 'Night terrors vs nightmares', duration: 4, lessons: [
+          {
+            id: 1,
+            title: 'Night terrors vs nightmares',
+            content: `
+              <p>Night terrors and nightmares are very different, and knowing which your child experiences changes how you respond. Night terrors happen in deep sleep (usually 1-3 hours after bedtime) — the child screams, looks terrified, but isn't actually awake and won't remember it. Nightmares happen in REM sleep (usually early morning) — the child wakes up scared and remembers the dream.</p>
+              <p>During a night terror, your child may push you away or seem not to recognize you. This is normal. Trying to wake them can prolong the episode.</p>
+              <div class="lesson-strategy">
+                <div class="lesson-strategy-label">Strategy to Try</div>
+                <div class="lesson-strategy-title">The Right Response for Each</div>
+                <div class="lesson-strategy-text">For night terrors: Don't try to wake your child. Stay nearby to ensure safety, speak in soft tones, and gently guide them back to bed if they're moving around. The episode will pass in 5-15 minutes. For nightmares: Comfort your child, turn on a dim light, offer reassurance, and help them feel safe. Talk about the dream briefly if it helps, then redirect to calm thoughts before returning to sleep.</div>
+              </div>
+              <p>If you're unsure which is happening, note the time. Night terrors are almost always in the first third of the night.</p>
+            `
+          }
+        ]},
+        { id: 3, title: 'Safety measures for sleepwalkers', duration: 4, lessons: [
+          {
+            id: 1,
+            title: 'Safety measures for sleepwalkers',
+            content: `
+              <p>About 15% of children sleepwalk at some point, usually between ages 4-8. While sleepwalking itself isn't dangerous, an unaware child moving around the house can get hurt.</p>
+              <p>Your main job isn't to stop the sleepwalking — it's to keep your child safe during episodes while addressing root causes like overtiredness.</p>
+              <div class="lesson-strategy">
+                <div class="lesson-strategy-label">Strategy to Try</div>
+                <div class="lesson-strategy-title">The Sleepwalker Safety Sweep</div>
+                <div class="lesson-strategy-text">Do a safety audit: Install gates at stairs (yes, even for big kids), put bells on your child's door so you hear them leave, lock exterior doors with high locks, clear hallways of tripping hazards, and secure windows. Consider a baby monitor in their room so you're alerted when they get up. Gently guide sleepwalking children back to bed without fully waking them — they'll return to normal sleep faster.</div>
+              </div>
+              <p>Never make fun of sleepwalking or tell embarrassing stories in front of your child — they can't control it and may become anxious about sleep.</p>
+            `
+          }
+        ]},
+        { id: 4, title: 'Prevention strategies', duration: 4, lessons: [
+          {
+            id: 1,
+            title: 'Prevention strategies',
+            content: `
+              <p>While you can't completely prevent parasomnias, you can reduce their frequency significantly. The biggest factor is ensuring your child gets enough sleep — overtiredness is the #1 trigger.</p>
+              <p>Stress, changes in routine, and illness can also trigger episodes. During transitions (new school, new sibling, moving), be extra vigilant about sleep.</p>
+              <div class="lesson-strategy">
+                <div class="lesson-strategy-label">Strategy to Try</div>
+                <div class="lesson-strategy-title">Scheduled Awakening</div>
+                <div class="lesson-strategy-text">If episodes happen at predictable times (say, always around 10pm), try "scheduled awakening." Gently rouse your child 15-30 minutes BEFORE the usual episode time — just enough that they shift position or mumble, then let them fall back to sleep. This disrupts the sleep cycle that triggers the episode. Do this nightly for 2-3 weeks. Studies show this can reduce night terrors by up to 90%.</div>
+              </div>
+              <p>Earlier bedtimes often help more than anything else. Try moving bedtime 30 minutes earlier for a week and see if episodes decrease.</p>
+            `
+          }
+        ]},
+        { id: 5, title: 'When to see a specialist', duration: 3, lessons: [
+          {
+            id: 1,
+            title: 'When to see a specialist',
+            content: `
+              <p>Most children outgrow parasomnias without any intervention. However, sometimes professional help is warranted to rule out underlying issues or develop a treatment plan.</p>
+              <p>Trust your instincts — you know your child best. If something feels wrong, it's always okay to seek an expert opinion.</p>
+              <div class="lesson-strategy">
+                <div class="lesson-strategy-label">Strategy to Try</div>
+                <div class="lesson-strategy-title">The "Time to Call" Checklist</div>
+                <div class="lesson-strategy-text">Consult your pediatrician or a sleep specialist if: episodes are happening multiple times per night, your child is getting injured during episodes, episodes continue past age 8-10, your child is excessively sleepy during the day despite adequate sleep time, you notice pauses in breathing or gasping during sleep, or episodes are causing significant family stress. Bring your sleep diary to the appointment — this information is invaluable for diagnosis.</div>
+              </div>
+              <p>A sleep study may be recommended in some cases to rule out sleep apnea or other disorders that can trigger parasomnias.</p>
+            `
+          }
+        ]},
       ]},
-      // Topic: Early waking
-      { id: 'early-morning-wakings', title: 'Solving Early Morning Wakings', description: 'Help your child sleep past 5am', category: 'topic', categoryId: 'early-waking', chapters: 5, duration: 20, chapterList: [
-        { id: 1, title: 'Common causes of early waking', duration: 4 },
-        { id: 2, title: 'Environmental fixes', duration: 4 },
-        { id: 3, title: 'Schedule adjustments', duration: 4 },
-        { id: 4, title: 'OK-to-wake clocks', duration: 4 },
-        { id: 5, title: 'When early waking is normal', duration: 4 },
+      { id: 'big-kid-room', title: 'Creating a Big Kid Sleep Space', description: 'Design a room that promotes great sleep for your preschooler', category: 'age', categoryId: '3-5y', chapters: 4, duration: 14, chapterList: [
+        { id: 1, title: 'Light and darkness', duration: 3, lessons: [
+          {
+            id: 1,
+            title: 'Light and darkness',
+            content: `
+              <p>Light is the most powerful signal for your child's internal clock. Bright light in the morning says "wake up!" while darkness at night triggers melatonin production for sleep.</p>
+              <p>Even small amounts of light can disrupt sleep quality. The glow from a nightlight, hallway light, or electronics can make a difference.</p>
+              <div class="lesson-strategy">
+                <div class="lesson-strategy-label">Strategy to Try</div>
+                <div class="lesson-strategy-title">The Light Audit</div>
+                <div class="lesson-strategy-text">After bedtime, sit in your child's room for 5 minutes with the lights off. Notice every source of light: streetlights through curtains, power strips, smoke detectors, hallway light under the door. Address each one with blackout curtains, electrical tape over LEDs, or a draft stopper under the door. If your child needs a nightlight, choose a dim red or orange one (not blue or white) and place it low to the ground, away from their line of sight in bed.</div>
+              </div>
+              <p>In the morning, open curtains immediately and turn on bright lights — this helps set the wake-up side of the sleep cycle too.</p>
+            `
+          }
+        ]},
+        { id: 2, title: 'Temperature and comfort', duration: 4, lessons: [
+          {
+            id: 1,
+            title: 'Temperature and comfort',
+            content: `
+              <p>The ideal sleep temperature is cooler than most parents expect: 65-70°F (18-21°C). Children's body temperature naturally drops during sleep, and a cool room supports this process.</p>
+              <p>Bedding matters too. Preschoolers are ready for a pillow and regular bedding, but keep it simple — too many blankets can cause overheating.</p>
+              <div class="lesson-strategy">
+                <div class="lesson-strategy-label">Strategy to Try</div>
+                <div class="lesson-strategy-title">The Comfort Test</div>
+                <div class="lesson-strategy-text">Dress your child in one more layer than you'd wear to sleep in the same room. Check their temperature by feeling the back of their neck or their chest — hands and feet can feel cool even when they're perfectly comfortable. If they're sweaty or their chest feels hot, remove a layer. Consider breathable cotton pajamas and bedding. A fan can help with both temperature and white noise.</div>
+              </div>
+              <p>If your child consistently kicks off covers, they may be too warm. Try lighter pajamas instead of fighting the blanket battle.</p>
+            `
+          }
+        ]},
+        { id: 3, title: 'Reducing distractions', duration: 3, lessons: [
+          {
+            id: 1,
+            title: 'Reducing distractions',
+            content: `
+              <p>A child's bedroom should be boring at bedtime — in a good way. Too many toys, books, or stimulating decorations can make it hard to wind down and tempting to play instead of sleep.</p>
+              <p>This doesn't mean the room can't be fun and personal, just that sleep time and play time need some separation.</p>
+              <div class="lesson-strategy">
+                <div class="lesson-strategy-label">Strategy to Try</div>
+                <div class="lesson-strategy-title">The Bedroom Reset</div>
+                <div class="lesson-strategy-text">Create a "sleep zone" around the bed that's calm and minimal. Move exciting toys to closets or bins that close. Keep only a few books accessible at bedtime. If your child has a play area in their room, consider a curtain or room divider to visually separate it at night. The bed should only be for sleeping — discourage playing on it during the day so the association stays strong.</div>
+              </div>
+              <p>A white noise machine can help mask household sounds and siblings that might otherwise distract or wake your child.</p>
+            `
+          }
+        ]},
+        { id: 4, title: 'Empowering independence', duration: 4, lessons: [
+          {
+            id: 1,
+            title: 'Empowering independence',
+            content: `
+              <p>Your preschooler is ready for more control over their sleep space. Giving them ownership helps build positive associations with their room and reduces bedtime resistance.</p>
+              <p>Independence doesn't mean leaving them alone — it means giving appropriate choices and building skills gradually.</p>
+              <div class="lesson-strategy">
+                <div class="lesson-strategy-label">Strategy to Try</div>
+                <div class="lesson-strategy-title">The Sleep Space Ownership Project</div>
+                <div class="lesson-strategy-text">Let your child help set up their sleep space. Take them shopping to pick out special pillowcase or sheets (within reason). Let them choose where their stuffed animals sleep. Create a "cozy corner" basket with a flashlight, a few books, and a quiet toy for early waking. Give them an OK-to-wake clock and celebrate when they stay in their room until it turns green. When children feel ownership, they're more likely to cooperate with the space.</div>
+              </div>
+              <p>Frame their bedroom as a special, safe place that's just for them — not as a place they're sent as punishment.</p>
+            `
+          }
+        ]},
       ]},
-      // Topic: Nap transitions
-      { id: 'nap-transition-guide', title: 'Complete Nap Transition Guide', description: 'Navigate every nap transition from 4 to 1 to none', category: 'topic', categoryId: 'nap-transitions', chapters: 6, duration: 26, chapterList: [
-        { id: 1, title: '4 to 3 nap transition', duration: 4 },
-        { id: 2, title: '3 to 2 nap transition', duration: 4 },
-        { id: 3, title: '2 to 1 nap transition', duration: 5 },
-        { id: 4, title: 'Dropping the final nap', duration: 5 },
-        { id: 5, title: 'Signs vs false alarms', duration: 4 },
-        { id: 6, title: 'Schedule adjustments during transitions', duration: 4 },
-      ]},
-      // Topic: Night wakings
-      { id: 'night-waking-solutions', title: 'Night Waking Solutions', description: 'Get everyone sleeping through the night', category: 'topic', categoryId: 'night-wakings', chapters: 6, duration: 24, chapterList: [
-        { id: 1, title: 'Why babies wake at night', duration: 4 },
-        { id: 2, title: 'Hunger vs habit wakings', duration: 4 },
-        { id: 3, title: 'Breaking sleep associations', duration: 4 },
-        { id: 4, title: 'Responding to wakings', duration: 4 },
-        { id: 5, title: 'Gradual night weaning', duration: 4 },
-        { id: 6, title: 'When wakings are medical', duration: 4 },
-      ]},
-      // Topic: Sleep regressions
-      { id: 'sleep-regression-survival', title: 'Sleep Regression Survival Guide', description: 'Get through every regression with your sanity intact', category: 'topic', categoryId: 'sleep-regressions', chapters: 7, duration: 28, chapterList: [
-        { id: 1, title: 'What causes regressions', duration: 4 },
-        { id: 2, title: 'The 4-month regression', duration: 4 },
-        { id: 3, title: 'The 8-10 month regression', duration: 4 },
-        { id: 4, title: 'The 12-month regression', duration: 4 },
-        { id: 5, title: 'The 18-month regression', duration: 4 },
-        { id: 6, title: 'The 2-year regression', duration: 4 },
-        { id: 7, title: 'General survival strategies', duration: 4 },
-      ]},
-      // Seasonal: Travel
+    ];
+
+    // Sample data for Seasonal guides (kept as static data)
+    const SEASONAL_GUIDES = [
       { id: 'travel-sleep-guide', title: 'Travel Sleep Guide', description: 'Maintain good sleep habits on the go', category: 'seasonal', categoryId: 'travel', chapters: 6, duration: 24, chapterList: [
         { id: 1, title: 'Preparing for travel', duration: 4 },
         { id: 2, title: 'Sleep on planes and in cars', duration: 4 },
@@ -930,14 +1792,12 @@
         { id: 5, title: 'Sticking to routines (mostly)', duration: 4 },
         { id: 6, title: 'Getting back on track after travel', duration: 4 },
       ]},
-      // Seasonal: Daylight saving
       { id: 'daylight-saving-guide', title: 'Daylight Saving Transitions', description: "Adjust your child's schedule smoothly", category: 'seasonal', categoryId: 'daylight-saving', chapters: 4, duration: 15, chapterList: [
         { id: 1, title: 'Spring forward strategy', duration: 4 },
         { id: 2, title: 'Fall back strategy', duration: 4 },
         { id: 3, title: 'Gradual vs cold turkey approach', duration: 3 },
         { id: 4, title: 'Recovery timeline expectations', duration: 4 },
       ]},
-      // Seasonal: Holidays
       { id: 'holiday-sleep-survival', title: 'Holiday Sleep Survival', description: 'Navigate parties, visitors, and excitement', category: 'seasonal', categoryId: 'holidays', chapters: 5, duration: 18, chapterList: [
         { id: 1, title: 'Managing overstimulation', duration: 4 },
         { id: 2, title: 'Flexible schedules that work', duration: 4 },
@@ -945,7 +1805,6 @@
         { id: 4, title: 'Saying no to late nights', duration: 3 },
         { id: 5, title: 'Post-holiday recovery', duration: 4 },
       ]},
-      // Seasonal: New sibling
       { id: 'new-sibling-sleep', title: 'Sleep with a New Sibling', description: 'Help your older child adjust when baby arrives', category: 'seasonal', categoryId: 'new-sibling', chapters: 5, duration: 20, chapterList: [
         { id: 1, title: 'Preparing before baby arrives', duration: 4 },
         { id: 2, title: 'Managing regression', duration: 4 },
@@ -955,10 +1814,66 @@
       ]},
     ];
 
-    const getGuidesByCategory = (category, categoryId) =>
-      GUIDES.filter(g => g.category === category && g.categoryId === categoryId);
+    // Helper to get guides by category - works with dynamic Contentful data
+    const getGuidesByCategory = (allGuides, category, categoryId) => {
+      if (category === 'seasonal') {
+        return SEASONAL_GUIDES.filter(g => g.categoryId === categoryId);
+      }
+      // For 18m-3y and 3-5y, use sample data
+      if (category === 'age' && (categoryId === '18m-3y' || categoryId === '3-5y')) {
+        return SAMPLE_AGE_GUIDES.filter(g => g.categoryId === categoryId);
+      }
+      return allGuides.filter(g => g.category === category && g.categoryId === categoryId);
+    };
 
-    const getGuideById = (id) => GUIDES.find(g => g.id === id);
+    // Search Contentful guides for lessons matching a topic keyword
+    const getLessonsByTopic = (allGuides, topicKeyword) => {
+      const lessons = [];
+      const keyword = topicKeyword.toLowerCase();
+
+      allGuides.forEach(guide => {
+        (guide.chapterList || []).forEach((chapter, chapterIdx) => {
+          // Check if chapter title matches
+          if (chapter.title?.toLowerCase().includes(keyword)) {
+            lessons.push({
+              ...chapter,
+              guideId: guide.id,
+              chapterIndex: chapterIdx,
+              guideTitle: guide.title,
+              matchType: 'chapter'
+            });
+          } else {
+            // Check lessons within the chapter
+            (chapter.lessons || []).forEach((lesson, lessonIdx) => {
+              if (lesson.title?.toLowerCase().includes(keyword)) {
+                lessons.push({
+                  id: lesson.id || `${chapter.id}-lesson-${lessonIdx}`,
+                  title: lesson.title,
+                  duration: chapter.duration || 5,
+                  guideId: guide.id,
+                  chapterIndex: chapterIdx,
+                  lessonIndex: lessonIdx,
+                  guideTitle: guide.title,
+                  chapterTitle: chapter.title,
+                  matchType: 'lesson'
+                });
+              }
+            });
+          }
+        });
+      });
+
+      return lessons;
+    };
+
+    // Helper to get guide by ID - searches Contentful, sample age guides, and seasonal data
+    const getGuideById = (allGuides, id) => {
+      const contentfulGuide = allGuides.find(g => g.id === id);
+      if (contentfulGuide) return contentfulGuide;
+      const sampleAgeGuide = SAMPLE_AGE_GUIDES.find(g => g.id === id);
+      if (sampleAgeGuide) return sampleAgeGuide;
+      return SEASONAL_GUIDES.find(g => g.id === id);
+    };
 
     const getCategoryLabel = (category, categoryId) => {
       if (category === 'age') return AGE_GROUPS.find(a => a.id === categoryId)?.label || categoryId;
@@ -1129,7 +2044,357 @@
       </button>
     );
 
-    // Sample lesson content for demo
+    // Chapter card for flat chapter view (used in 4-5m category)
+    const ChapterCard = ({ chapter, guideId, chapterIndex, onSelect }) => (
+      <button className="guide-card" onClick={() => onSelect(guideId, chapterIndex)}>
+        <div className="guide-card-content">
+          <h3 className="guide-card-title">{chapter.title}</h3>
+          {chapter.subtitle && <p className="guide-card-description">{chapter.subtitle}</p>}
+          {chapter.description && !chapter.subtitle && <p className="guide-card-description">{chapter.description}</p>}
+          <div className="guide-card-meta">
+            {chapter.lessons && chapter.lessons.length > 0 && (
+              <span><BookIcon /> {chapter.lessons.length} lessons</span>
+            )}
+            <span><ClockIcon /> {chapter.duration} min</span>
+          </div>
+        </div>
+        <div className="guide-card-arrow"><ChevronIcon /></div>
+      </button>
+    );
+
+    // Strategy metadata for displaying saved strategies
+    const STRATEGIES_MAP = {
+      'the-sleep-window-sweet-spot': { title: 'The Sleep Window Sweet Spot', chapter: 'Understanding preschool sleep needs', guide: 'preschooler-bedtime', chapterIndex: 0 },
+      'the-4-b-s-routine': { title: "The 4 B's Routine", chapter: 'Building an effective routine', guide: 'preschooler-bedtime', chapterIndex: 1 },
+      'the-bedtime-ticket-system': { title: 'The Bedtime Ticket System', chapter: 'Managing stall tactics', guide: 'preschooler-bedtime', chapterIndex: 2 },
+      'monster-spray-brave-training': { title: 'Monster Spray & Brave Training', chapter: 'Nighttime fears and nightmares', guide: 'preschooler-bedtime', chapterIndex: 3 },
+      'the-sticker-chart-sprint': { title: 'The Sticker Chart Sprint', chapter: 'Reward systems that work', guide: 'preschooler-bedtime', chapterIndex: 4 },
+      'the-backwards-bedtime-calculator': { title: 'The Backwards Bedtime Calculator', chapter: 'Sleep needs for school success', guide: 'school-ready-sleep', chapterIndex: 0 },
+      'the-15-minute-shift': { title: 'The 15-Minute Shift', chapter: 'Adjusting to early wake times', guide: 'school-ready-sleep', chapterIndex: 1 },
+      'the-one-hour-rule': { title: 'The One-Hour Rule', chapter: 'Weekend vs weekday schedules', guide: 'school-ready-sleep', chapterIndex: 2 },
+      'the-ready-for-bed-checklist': { title: 'The Ready-for-Bed Checklist', chapter: 'Building independence', guide: 'school-ready-sleep', chapterIndex: 3 },
+      'the-sleep-diary-detective': { title: 'The Sleep Diary Detective', chapter: 'What are parasomnias?', guide: 'night-terrors-sleepwalking', chapterIndex: 0 },
+      'the-right-response-for-each': { title: 'The Right Response for Each', chapter: 'Night terrors vs nightmares', guide: 'night-terrors-sleepwalking', chapterIndex: 1 },
+      'the-sleepwalker-safety-sweep': { title: 'The Sleepwalker Safety Sweep', chapter: 'Safety measures for sleepwalkers', guide: 'night-terrors-sleepwalking', chapterIndex: 2 },
+      'scheduled-awakening': { title: 'Scheduled Awakening', chapter: 'Prevention strategies', guide: 'night-terrors-sleepwalking', chapterIndex: 3 },
+      'the-time-to-call-checklist': { title: 'The "Time to Call" Checklist', chapter: 'When to see a specialist', guide: 'night-terrors-sleepwalking', chapterIndex: 4 },
+      'the-light-audit': { title: 'The Light Audit', chapter: 'Light and darkness', guide: 'big-kid-room', chapterIndex: 0 },
+      'the-comfort-test': { title: 'The Comfort Test', chapter: 'Temperature and comfort', guide: 'big-kid-room', chapterIndex: 1 },
+      'the-bedroom-reset': { title: 'The Bedroom Reset', chapter: 'Reducing distractions', guide: 'big-kid-room', chapterIndex: 2 },
+      'the-sleep-space-ownership-project': { title: 'The Sleep Space Ownership Project', chapter: 'Empowering independence', guide: 'big-kid-room', chapterIndex: 3 },
+    };
+
+    // Get saved strategies from localStorage
+    const getSavedStrategies = () => {
+      const saved = [];
+      try {
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key?.startsWith('trying-strategy-') && localStorage.getItem(key) === 'true') {
+            const strategyId = key.replace('trying-strategy-', '');
+            if (STRATEGIES_MAP[strategyId]) {
+              saved.push({ id: strategyId, ...STRATEGIES_MAP[strategyId] });
+            }
+          }
+        }
+      } catch {
+        // localStorage not available
+      }
+      return saved;
+    };
+
+    // My Strategies Component
+    const MyStrategies = ({ onSelectStrategy }) => {
+      const [strategies, setStrategies] = useState([]);
+
+      useEffect(() => {
+        setStrategies(getSavedStrategies());
+
+        // Listen for storage changes
+        const handleStorage = () => setStrategies(getSavedStrategies());
+        window.addEventListener('storage', handleStorage);
+        return () => window.removeEventListener('storage', handleStorage);
+      }, []);
+
+      // Refresh strategies when component mounts or becomes visible
+      useEffect(() => {
+        const interval = setInterval(() => {
+          setStrategies(getSavedStrategies());
+        }, 1000);
+        return () => clearInterval(interval);
+      }, []);
+
+      const removeStrategy = (e, strategyId) => {
+        e.stopPropagation(); // Prevent card click
+        try {
+          localStorage.removeItem(`trying-strategy-${strategyId}`);
+          localStorage.removeItem(`nights-tracker-${strategyId}`);
+          setStrategies(getSavedStrategies());
+        } catch {}
+      };
+
+      if (strategies.length === 0) {
+        return null; // Don't show section if no strategies saved
+      }
+
+      return (
+        <section className="my-strategies-section">
+          <div className="my-strategies-header">
+            <span className="my-strategies-label">My Strategies</span>
+            <span className="my-strategies-count">{strategies.length} active</span>
+          </div>
+          <div className="my-strategies-list">
+            {strategies.map(strategy => (
+              <div key={strategy.id} className="strategy-card-wrapper">
+                <button
+                  className="strategy-card"
+                  onClick={() => onSelectStrategy(strategy.guide, strategy.chapterIndex)}
+                >
+                  <div className="strategy-card-check">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1a2744" strokeWidth="3">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </div>
+                  <div className="strategy-card-content">
+                    <div className="strategy-card-title">{strategy.title}</div>
+                    <div className="strategy-card-source">{strategy.chapter}</div>
+                  </div>
+                  <div className="strategy-card-arrow"><ChevronIcon /></div>
+                </button>
+                <button
+                  className="strategy-card-remove"
+                  onClick={(e) => removeStrategy(e, strategy.id)}
+                  aria-label="Remove strategy"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </button>
+              </div>
+            ))}
+          </div>
+        </section>
+      );
+    };
+
+    // Night Tracker Component
+    const NightTracker = ({ strategyId, strategyTitle }) => {
+      const storageKey = `nights-tracker-${strategyId}`;
+      const [nights, setNights] = useState(() => {
+        try {
+          const saved = localStorage.getItem(storageKey);
+          return saved ? JSON.parse(saved) : [false, false, false, false, false, false, false];
+        } catch {
+          return [false, false, false, false, false, false, false];
+        }
+      });
+      const [showCelebration, setShowCelebration] = useState(false);
+      const [confetti, setConfetti] = useState([]);
+      const [showCheckin, setShowCheckin] = useState(false);
+
+      const toggleNight = (index) => {
+        const newNights = [...nights];
+        newNights[index] = !newNights[index];
+        setNights(newNights);
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(newNights));
+        } catch {}
+
+        // Show check-in when N3 (index 2) is marked complete
+        if (index === 2 && newNights[2]) {
+          setTimeout(() => setShowCheckin(true), 500);
+        }
+
+        // Check if just completed all 7
+        const newCount = newNights.filter(Boolean).length;
+        if (newCount === 7 && !showCelebration) {
+          triggerCelebration();
+        }
+      };
+
+      const handleCheckinResponse = (response) => {
+        // Could save response to localStorage or send to analytics
+        console.log('Check-in response:', response);
+        setShowCheckin(false);
+      };
+
+      const triggerCelebration = () => {
+        setShowCelebration(true);
+        // Generate confetti pieces
+        const pieces = [];
+        const colors = ['#2dd4bf', '#f5e6d3', '#ffd700', '#ff6b9d', '#a78bfa', '#34d399'];
+        for (let i = 0; i < 50; i++) {
+          pieces.push({
+            id: i,
+            left: Math.random() * 100,
+            delay: Math.random() * 0.5,
+            duration: 1.5 + Math.random() * 1,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            rotation: Math.random() * 360,
+            size: 6 + Math.random() * 6
+          });
+        }
+        setConfetti(pieces);
+        // Clear celebration after animation
+        setTimeout(() => {
+          setShowCelebration(false);
+          setConfetti([]);
+        }, 3000);
+      };
+
+      const completedCount = nights.filter(Boolean).length;
+      const nightLabels = ['N1', 'N2', 'N3', 'N4', 'N5', 'N6', 'N7'];
+      const allComplete = completedCount === 7;
+
+      const getMessage = () => {
+        if (completedCount === 0) return "Tap each night you try this strategy";
+        if (completedCount < 3) return "Great start! Keep going!";
+        if (completedCount < 5) return "You're building a habit!";
+        if (completedCount < 7) return "Almost there! Stay consistent!";
+        return "You did it! 7 nights complete!";
+      };
+
+      return (
+        <div className={`night-tracker ${allComplete ? 'all-complete' : ''}`}>
+          {showCelebration && (
+            <div className="confetti-container">
+              {confetti.map(piece => (
+                <div
+                  key={piece.id}
+                  className="confetti-piece"
+                  style={{
+                    left: `${piece.left}%`,
+                    animationDelay: `${piece.delay}s`,
+                    animationDuration: `${piece.duration}s`,
+                    backgroundColor: piece.color,
+                    transform: `rotate(${piece.rotation}deg)`,
+                    width: piece.size,
+                    height: piece.size
+                  }}
+                />
+              ))}
+            </div>
+          )}
+          <div className="night-tracker-header">
+            <span className="night-tracker-title">
+              {allComplete ? 'Completed!' : 'Track Your Progress'}
+            </span>
+            <span className="night-tracker-progress">{completedCount}/7 nights</span>
+          </div>
+          <div className="night-tracker-nights">
+            {nights.map((completed, index) => (
+              <div
+                key={index}
+                className={`night-tracker-night ${completed ? 'completed' : ''}`}
+                onClick={() => toggleNight(index)}
+              >
+                <div className={`night-tracker-circle ${completed ? 'completed' : ''}`}>
+                  {completed ? (
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1a2744" strokeWidth="3">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  ) : (
+                    <span className="night-tracker-number">{index + 1}</span>
+                  )}
+                </div>
+                <span className="night-tracker-label">{nightLabels[index]}</span>
+              </div>
+            ))}
+          </div>
+          <div className={`night-tracker-message ${allComplete ? 'complete' : ''}`}>
+            {allComplete && <span className="celebration-star">⭐</span>}
+            {getMessage()}
+            {allComplete && <span className="celebration-star">⭐</span>}
+          </div>
+
+          {/* Check-in Bottom Sheet */}
+          {showCheckin && (
+            <div className="checkin-overlay" onClick={() => setShowCheckin(false)}>
+              <div className="checkin-sheet" onClick={e => e.stopPropagation()}>
+                <div className="checkin-handle"></div>
+                <div className="checkin-header">
+                  <span className="checkin-emoji">👋</span>
+                  <h3 className="checkin-title">How's it going?</h3>
+                  <p className="checkin-subtitle">You've tried this strategy for 3 nights!</p>
+                </div>
+                <div className="checkin-options">
+                  <button className="checkin-option" onClick={() => handleCheckinResponse('working')}>
+                    <span className="checkin-option-emoji">😊</span>
+                    <span className="checkin-option-text">It's working!</span>
+                  </button>
+                  <button className="checkin-option" onClick={() => handleCheckinResponse('some-progress')}>
+                    <span className="checkin-option-emoji">🤔</span>
+                    <span className="checkin-option-text">Some progress</span>
+                  </button>
+                  <button className="checkin-option" onClick={() => handleCheckinResponse('not-yet')}>
+                    <span className="checkin-option-emoji">😅</span>
+                    <span className="checkin-option-text">Not yet</span>
+                  </button>
+                  <button className="checkin-option" onClick={() => handleCheckinResponse('need-help')}>
+                    <span className="checkin-option-emoji">🆘</span>
+                    <span className="checkin-option-text">Need help</span>
+                  </button>
+                </div>
+                <button className="checkin-dismiss" onClick={() => setShowCheckin(false)}>
+                  Keep going
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    };
+
+    // TryingThis Toggle Component
+    const TryingThisToggle = ({ strategyId }) => {
+      const storageKey = `trying-strategy-${strategyId}`;
+      const [isTrying, setIsTrying] = useState(() => {
+        try {
+          return localStorage.getItem(storageKey) === 'true';
+        } catch {
+          return false;
+        }
+      });
+
+      const handleToggle = () => {
+        const newValue = !isTrying;
+        setIsTrying(newValue);
+        try {
+          localStorage.setItem(storageKey, newValue.toString());
+        } catch {
+          // localStorage not available
+        }
+      };
+
+      return (
+        <div
+          className={`trying-this-toggle ${isTrying ? 'active' : ''}`}
+          onClick={handleToggle}
+        >
+          <div className={`trying-this-checkbox ${isTrying ? 'checked' : ''}`}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1a2744" strokeWidth="3">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </div>
+          <span className="trying-this-label">
+            {isTrying ? "I'm trying this!" : "I want to try this"}
+          </span>
+        </div>
+      );
+    };
+
+    // Helper to extract strategy title from content for creating unique IDs
+    const extractStrategyId = (content) => {
+      if (!content) return null;
+      const match = content.match(/lesson-strategy-title[^>]*>([^<]+)</);
+      if (match) {
+        return match[1].toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      }
+      return null;
+    };
+
+    // Sample lesson content for demo (fallback for sample guides)
     const LESSON_CONTENT = {
       default: {
         intro: "This chapter will help you understand key concepts and practical strategies you can start using today.",
@@ -1139,10 +2404,47 @@
     };
 
     const LessonPlayer = ({ guide, chapter, chapterIndex, totalChapters, onClose, onNext, onPrev }) => {
-      const progress = ((chapterIndex + 1) / totalChapters) * 100;
-      const content = LESSON_CONTENT.default;
+      const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
+
+      const hasLessons = chapter.lessons && chapter.lessons.length > 0;
+      const currentLesson = hasLessons ? chapter.lessons[currentLessonIndex] : null;
+      const totalLessons = hasLessons ? chapter.lessons.length : 1;
+
+      // Calculate overall progress
+      const chaptersCompleted = chapterIndex;
+      const lessonsInCurrentChapter = currentLessonIndex + 1;
+      const progress = ((chapterIndex + (currentLessonIndex + 1) / totalLessons) / totalChapters) * 100;
+
       const isFirstChapter = chapterIndex === 0;
       const isLastChapter = chapterIndex === totalChapters - 1;
+      const isFirstLesson = currentLessonIndex === 0;
+      const isLastLesson = currentLessonIndex === totalLessons - 1;
+
+      const handleNext = () => {
+        if (hasLessons && !isLastLesson) {
+          setCurrentLessonIndex(prev => prev + 1);
+        } else if (!isLastChapter) {
+          setCurrentLessonIndex(0);
+          onNext();
+        } else {
+          onClose();
+        }
+      };
+
+      const handlePrev = () => {
+        if (hasLessons && !isFirstLesson) {
+          setCurrentLessonIndex(prev => prev - 1);
+        } else if (!isFirstChapter) {
+          onPrev();
+          // Note: We'd need to set to last lesson of previous chapter, but keeping simple for now
+        }
+      };
+
+      const canGoPrev = !isFirstChapter || !isFirstLesson;
+      const isAtEnd = isLastChapter && isLastLesson;
+
+      // Get content - either from Contentful lesson or fallback
+      const fallbackContent = LESSON_CONTENT.default;
 
       return (
         <div className="lesson-player">
@@ -1152,31 +2454,71 @@
               <div className="lesson-progress-bar">
                 <div className="lesson-progress-fill" style={{ width: `${progress}%` }} />
               </div>
-              <div className="lesson-progress-text">{chapterIndex + 1} of {totalChapters}</div>
+              <div className="lesson-progress-text">
+                Chapter {chapterIndex + 1}{hasLessons ? `, Lesson ${currentLessonIndex + 1}/${totalLessons}` : ''} of {totalChapters}
+              </div>
             </div>
             <div style={{ width: 36 }} />
           </div>
           <div className="lesson-content">
-            <div className="lesson-chapter-label">Chapter {chapterIndex + 1}</div>
-            <h1 className="lesson-title">{chapter.title}</h1>
-            <div className="lesson-body">
-              <p>{content.intro}</p>
-              <p>{content.body.split('\n\n')[0]}</p>
-              <div className="lesson-tip">
-                <div className="lesson-tip-label">Pro Tip</div>
-                <div className="lesson-tip-text">{content.tip}</div>
+            <div className="lesson-chapter-label">Chapter {chapterIndex + 1}{hasLessons ? ` · Lesson ${currentLessonIndex + 1}` : ''}</div>
+            <h1 className="lesson-title">{currentLesson?.title || chapter.title}</h1>
+
+            {/* Show night tracker if user is trying this strategy */}
+            {(() => {
+              const strategyId = extractStrategyId(currentLesson?.content);
+              if (strategyId) {
+                try {
+                  const isTrying = localStorage.getItem(`trying-strategy-${strategyId}`) === 'true';
+                  if (isTrying) {
+                    const strategyInfo = STRATEGIES_MAP[strategyId];
+                    return <NightTracker strategyId={strategyId} strategyTitle={strategyInfo?.title || strategyId} />;
+                  }
+                } catch {}
+              }
+              return null;
+            })()}
+
+            {/* Show Contentful content if available */}
+            {currentLesson ? (
+              <div className="lesson-body">
+                {currentLesson.preamble && (
+                  <div dangerouslySetInnerHTML={{ __html: currentLesson.preamble }} />
+                )}
+                {currentLesson.content && (
+                  <div dangerouslySetInnerHTML={{ __html: currentLesson.content }} />
+                )}
+                {/* Add trying-this toggle if there's a strategy in the content */}
+                {extractStrategyId(currentLesson.content) && (
+                  <TryingThisToggle strategyId={extractStrategyId(currentLesson.content)} />
+                )}
+                {!currentLesson.preamble && !currentLesson.content && (
+                  <p style={{color: 'var(--color-text-muted)', fontStyle: 'italic'}}>
+                    Lesson content coming soon...
+                  </p>
+                )}
               </div>
-              <p>{content.body.split('\n\n')[1]}</p>
-            </div>
+            ) : (
+              /* Fallback content for sample guides */
+              <div className="lesson-body">
+                <p>{fallbackContent.intro}</p>
+                <p>{fallbackContent.body.split('\n\n')[0]}</p>
+                <div className="lesson-tip">
+                  <div className="lesson-tip-label">Pro Tip</div>
+                  <div className="lesson-tip-text">{fallbackContent.tip}</div>
+                </div>
+                <p>{fallbackContent.body.split('\n\n')[1]}</p>
+              </div>
+            )}
           </div>
           <div className="lesson-footer">
-            {!isFirstChapter && (
-              <button className="lesson-btn lesson-btn-secondary" onClick={onPrev}>
+            {canGoPrev && (
+              <button className="lesson-btn lesson-btn-secondary" onClick={handlePrev}>
                 Previous
               </button>
             )}
-            <button className="lesson-btn lesson-btn-primary" onClick={isLastChapter ? onClose : onNext}>
-              {isLastChapter ? 'Finish Guide' : 'Next Chapter'}
+            <button className="lesson-btn lesson-btn-primary" onClick={handleNext}>
+              {isAtEnd ? 'Finish Guide' : (hasLessons && !isLastLesson ? 'Next Lesson' : 'Next Chapter')}
             </button>
           </div>
         </div>
@@ -1280,19 +2622,34 @@
     };
 
     // Get recommended guide based on child's age
-    const getRecommendedGuide = (ageMonths) => {
-      // Age-specific recommendations
+    // Helper to find a Contentful guide by title pattern
+    const findGuideByTitle = (guides, pattern) => {
+      const lowerPattern = pattern.toLowerCase();
+      return guides.find(g => g.title?.toLowerCase().includes(lowerPattern));
+    };
+
+    const getRecommendedGuide = (ageMonths, contentfulGuides = []) => {
+      // Age-specific recommendations - try to find from Contentful first
       if (ageMonths >= 3 && ageMonths <= 5) {
+        const guide = findGuideByTitle(contentfulGuides, '4-5 month') ||
+                      findGuideByTitle(contentfulGuides, '4 month');
+        if (guide) {
+          return { ...guide, icon: '🌙' };
+        }
         return {
           id: '4-month-regression',
           icon: '🌙',
-          title: 'Navigating the 4-Month Sleep Regression',
+          title: '4-Month Sleep Regression',
           description: 'Your baby is at the perfect age to learn about this major sleep milestone.',
           chapters: 5,
           duration: 20,
         };
       }
       if (ageMonths >= 0 && ageMonths <= 2) {
+        const guide = findGuideByTitle(contentfulGuides, '0-3 month');
+        if (guide) {
+          return { ...guide, icon: '👶' };
+        }
         return {
           id: 'newborn-sleep-foundations',
           icon: '👶',
@@ -1375,11 +2732,23 @@
       }
     };
 
-    const HomePage = ({ onSelectGuide }) => {
+    const HomePage = ({ onSelectGuide, onSelectChapter, contentfulGuides, isLoading, error }) => {
       const [browseMode, setBrowseMode] = useState(BROWSE_MODES.AGE);
       const [childAge, setChildAge] = useState(4); // Default: 4 months
       const [showAgePicker, setShowAgePicker] = useState(false);
       const [selectedCategory, setSelectedCategory] = useState(getAgeGroupForChild(4));
+      const [showRecommended, setShowRecommended] = useState(() => {
+        try {
+          return localStorage.getItem('hide-recommended') !== 'true';
+        } catch { return true; }
+      });
+
+      const dismissRecommended = () => {
+        setShowRecommended(false);
+        try {
+          localStorage.setItem('hide-recommended', 'true');
+        } catch {}
+      };
 
       const categories = useMemo(() => {
         switch (browseMode) {
@@ -1405,19 +2774,56 @@
       };
 
       const guides = useMemo(() =>
-        getGuidesByCategory(browseMode, selectedCategory),
-        [browseMode, selectedCategory]
+        getGuidesByCategory(contentfulGuides, browseMode, selectedCategory),
+        [contentfulGuides, browseMode, selectedCategory]
       );
 
+      // For 0-3m, 4-5m, and 6-17m, flatten chapters from all guides (deduplicated)
+      const flattenedChapters = useMemo(() => {
+        if (selectedCategory !== '4-5m' && selectedCategory !== '0-3m' && selectedCategory !== '6-17m') return null;
+        const chapters = [];
+        const seenIds = new Set();
+        guides.forEach(guide => {
+          (guide.chapterList || []).forEach((chapter, idx) => {
+            // Skip if we've already seen this chapter (by id or title)
+            const key = chapter.id || chapter.title;
+            if (seenIds.has(key)) return;
+            seenIds.add(key);
+            chapters.push({
+              ...chapter,
+              guideId: guide.id,
+              chapterIndex: idx,
+              guideTitle: guide.title
+            });
+          });
+        });
+        return chapters;
+      }, [guides, selectedCategory]);
+
+      // Get nap transition lessons from Contentful
+      const napTransitionLessons = useMemo(() => {
+        if (browseMode !== BROWSE_MODES.TOPIC || selectedCategory !== 'nap-transitions') return null;
+        return getLessonsByTopic(contentfulGuides, 'nap transition');
+      }, [browseMode, selectedCategory, contentfulGuides]);
+
       const recommendedGuide = useMemo(() =>
-        getRecommendedGuide(childAge),
-        [childAge]
+        getRecommendedGuide(childAge, contentfulGuides),
+        [childAge, contentfulGuides]
       );
 
       const currentCategoryLabel = useMemo(() =>
         categories.find(c => c.id === selectedCategory)?.label || '',
         [categories, selectedCategory]
       );
+
+      // Determine if we're showing Contentful or sample content
+      const isNapTransitions = browseMode === BROWSE_MODES.TOPIC && selectedCategory === 'nap-transitions';
+      const isSampleCategory = browseMode === BROWSE_MODES.SEASONAL ||
+        (browseMode === BROWSE_MODES.AGE && (selectedCategory === '18m-3y' || selectedCategory === '3-5y')) ||
+        (browseMode === BROWSE_MODES.TOPIC && !isNapTransitions);
+
+      // Check if we should show flat chapter view
+      const showChapterView = (selectedCategory === '4-5m' || selectedCategory === '0-3m' || selectedCategory === '6-17m') && flattenedChapters && flattenedChapters.length > 0;
 
       return (
         <div className="page">
@@ -1440,37 +2846,96 @@
           <section className="search-section">
             <SearchBar onSelectGuide={onSelectGuide} />
           </section>
-          <section className="recommended-section">
-            <div className="recommended-label">Recommended for you</div>
-            <RecommendedCard guide={recommendedGuide} onSelect={onSelectGuide} />
-          </section>
-          <BrowseTabs activeMode={browseMode} onModeChange={handleModeChange} />
-          <section className="section" style={{paddingTop: 0}}>
-            <CategoryPills
+          <MyStrategies onSelectStrategy={onSelectChapter} />
+          {showRecommended && (
+            <section className="recommended-section">
+              <div className="recommended-header">
+                <div className="recommended-label">Recommended for you</div>
+                <button className="recommended-dismiss" onClick={dismissRecommended} aria-label="Dismiss">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </button>
+              </div>
+              <RecommendedCard guide={recommendedGuide} onSelect={onSelectGuide} />
+            </section>
+          )}
+          <div className="browse-section">
+            <div className="browse-section-divider"></div>
+            <BrowseTabs activeMode={browseMode} onModeChange={handleModeChange} />
+            <section className="section" style={{paddingTop: 0}}>
+              <CategoryPills
               categories={categories}
               activeCategory={selectedCategory}
               onCategoryChange={setSelectedCategory}
             />
           </section>
           <section className="section" style={{paddingTop: 0}}>
-            <h2 className="section-title">{currentCategoryLabel}</h2>
+            <h2 className="section-title">
+              {currentCategoryLabel}
+              {!isSampleCategory && !isLoading && <span className="content-source-badge">Contentful</span>}
+              {isSampleCategory && <span className="content-source-badge" style={{backgroundColor: 'var(--color-navy-light)', color: 'var(--color-text-secondary)'}}>Sample</span>}
+            </h2>
             <div className="guide-list">
-              {guides.length > 0 ? (
+              {isLoading && !isSampleCategory ? (
+                <div className="loading-spinner">
+                  <div className="spinner"></div>
+                  <span className="loading-text">Loading guides...</span>
+                </div>
+              ) : error && !isSampleCategory ? (
+                <div className="error-message">
+                  <p>Failed to load guides: {error}</p>
+                  <p style={{marginTop: '8px', color: 'var(--color-text-muted)'}}>Check your Contentful configuration.</p>
+                </div>
+              ) : showChapterView ? (
+                /* Show flat chapter list for 0-3m, 4-5m, 6-17m */
+                flattenedChapters.map((chapter, idx) => (
+                  <ChapterCard
+                    key={`${chapter.guideId}-${chapter.chapterIndex}`}
+                    chapter={chapter}
+                    guideId={chapter.guideId}
+                    chapterIndex={chapter.chapterIndex}
+                    onSelect={onSelectChapter}
+                  />
+                ))
+              ) : isNapTransitions && napTransitionLessons ? (
+                /* Show nap transition lessons from Contentful */
+                napTransitionLessons.length > 0 ? (
+                  napTransitionLessons.map((item, idx) => (
+                    <ChapterCard
+                      key={`${item.guideId}-${item.chapterIndex}-${item.lessonIndex || 0}`}
+                      chapter={{
+                        ...item,
+                        title: item.title,
+                        duration: item.duration,
+                        subtitle: item.matchType === 'lesson' ? `From: ${item.chapterTitle}` : `From: ${item.guideTitle}`
+                      }}
+                      guideId={item.guideId}
+                      chapterIndex={item.chapterIndex}
+                      onSelect={onSelectChapter}
+                    />
+                  ))
+                ) : (
+                  <div className="guide-list-empty"><p>No nap transition content found.</p></div>
+                )
+              ) : guides.length > 0 ? (
                 guides.map(guide => (
                   <GuideCard key={guide.id} guide={guide} onSelect={onSelectGuide} />
                 ))
               ) : (
-                <div className="guide-list-empty"><p>No guides available yet.</p></div>
+                <div className="guide-list-empty"><p>No guides available for this category yet.</p></div>
               )}
             </div>
           </section>
+          </div>
         </div>
       );
     };
 
-    const GuideDetailPage = ({ guideId, onBack }) => {
-      const guide = getGuideById(guideId);
-      const [currentChapter, setCurrentChapter] = useState(null);
+    const GuideDetailPage = ({ guideId, onBack, contentfulGuides, initialChapter }) => {
+      const guide = getGuideById(contentfulGuides, guideId);
+      const [currentChapter, setCurrentChapter] = useState(initialChapter);
 
       if (!guide) {
         return (
@@ -1534,13 +2999,62 @@
     // App
     const App = () => {
       const [currentGuide, setCurrentGuide] = useState(null);
+      const [startAtChapter, setStartAtChapter] = useState(null);
+      const [contentfulGuides, setContentfulGuides] = useState([]);
+      const [isLoading, setIsLoading] = useState(true);
+      const [error, setError] = useState(null);
+
+      // Fetch Contentful data on mount
+      useEffect(() => {
+        async function loadContentfulData() {
+          try {
+            setIsLoading(true);
+            setError(null);
+            const courses = await fetchCourses();
+            console.log('Loaded courses from Contentful:', courses);
+            setContentfulGuides(courses);
+          } catch (err) {
+            console.error('Failed to fetch from Contentful:', err);
+            setError(err.message);
+          } finally {
+            setIsLoading(false);
+          }
+        }
+        loadContentfulData();
+      }, []);
+
+      const handleSelectGuide = (guideId) => {
+        setCurrentGuide(guideId);
+        setStartAtChapter(null);
+      };
+
+      const handleSelectChapter = (guideId, chapterIndex) => {
+        setCurrentGuide(guideId);
+        setStartAtChapter(chapterIndex);
+      };
+
+      const handleBack = () => {
+        setCurrentGuide(null);
+        setStartAtChapter(null);
+      };
 
       return (
         <div className="app-container">
           {currentGuide ? (
-            <GuideDetailPage guideId={currentGuide} onBack={() => setCurrentGuide(null)} />
+            <GuideDetailPage
+              guideId={currentGuide}
+              onBack={handleBack}
+              contentfulGuides={contentfulGuides}
+              initialChapter={startAtChapter}
+            />
           ) : (
-            <HomePage onSelectGuide={setCurrentGuide} />
+            <HomePage
+              onSelectGuide={handleSelectGuide}
+              onSelectChapter={handleSelectChapter}
+              contentfulGuides={contentfulGuides}
+              isLoading={isLoading}
+              error={error}
+            />
           )}
         </div>
       );
