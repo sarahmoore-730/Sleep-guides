@@ -1,0 +1,55 @@
+.category-pills-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  margin: 0 calc(-1 * var(--space-md));
+  padding: 0 var(--space-md);
+}
+
+.category-pills-container::-webkit-scrollbar {
+  display: none;
+}
+
+.category-pills {
+  display: flex;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;
+}
+
+.category-pill {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-full);
+  background-color: var(--color-card-bg);
+  color: var(--color-text-secondary);
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+  min-height: 44px;
+}
+
+.category-pill:active {
+  transform: scale(0.97);
+}
+
+.category-pill.active {
+  background-color: var(--color-cream);
+  border-color: var(--color-cream);
+  color: var(--color-text-dark);
+}
+
+.category-icon {
+  font-size: var(--font-size-md);
+}
+
+.category-label {
+  line-height: 1;
+}

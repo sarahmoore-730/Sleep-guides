@@ -1,0 +1,12 @@
+.home-page .section {
+  padding-top: 0;
+}
+
+.home-page .section-title {
+  padding: 0 var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.home-page .guide-list {
+  padding-top: 0;
+}

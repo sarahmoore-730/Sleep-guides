@@ -1,0 +1,76 @@
+.chapter-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.chapter-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  width: 100%;
+  padding: var(--space-lg);
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--color-card-border);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  text-align: left;
+  font-family: var(--font-family);
+}
+
+.chapter-item:last-child {
+  border-bottom: none;
+}
+
+.chapter-item:active {
+  background-color: var(--color-card-bg);
+}
+
+.chapter-number {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-navy-light);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+
+.chapter-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.chapter-title {
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin: 0 0 var(--space-xs) 0;
+  line-height: 1.3;
+}
+
+.chapter-duration {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.chapter-action {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-teal);
+  border-radius: 50%;
+  color: var(--color-text-dark);
+}
+
+.chapter-action svg {
+  margin-left: 2px;
+}

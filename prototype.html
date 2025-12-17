@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#1a2744" />
+  <title>Sleep Guides</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-navy: #1a2744;
+      --color-navy-light: #243352;
+      --color-cream: #f5e6d3;
+      --color-teal: #2dd4bf;
+      --color-teal-dark: #14b8a6;
+      --color-text-primary: #ffffff;
+      --color-text-secondary: rgba(255, 255, 255, 0.7);
+      --color-text-muted: rgba(255, 255, 255, 0.5);
+      --color-text-dark: #1a2744;
+      --color-text-dark-secondary: rgba(26, 39, 68, 0.7);
+      --color-card-bg: rgba(255, 255, 255, 0.08);
+      --color-card-border: rgba(255, 255, 255, 0.12);
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+      --space-xxl: 48px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+      --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --safe-area-top: env(safe-area-inset-top, 0px);
+      --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body, #root { height: 100%; width: 100%; }
+    body {
+      font-family: var(--font-family);
+      background-color: var(--color-navy);
+      color: var(--color-text-primary);
+      -webkit-font-smoothing: antialiased;
+    }
+    .app-container {
+      max-width: 430px;
+      margin: 0 auto;
+      min-height: 100%;
+      background-color: var(--color-navy);
+    }
+    .page { min-height: 100vh; padding-bottom: 40px; }
+    .header {
+      background-color: var(--color-cream);
+      padding: calc(var(--safe-area-top) + var(--space-lg)) var(--space-md) var(--space-xl);
+      border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+    }
+    .header-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--color-text-dark);
+      margin-bottom: var(--space-xs);
+    }
+    .header-subtitle {
+      font-size: 16px;
+      color: var(--color-text-dark-secondary);
+    }
+    .child-age-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-top: var(--space-md);
+      padding: var(--space-sm) var(--space-md);
+      background-color: rgba(26, 39, 68, 0.08);
+      border-radius: var(--radius-full);
+    }
+    .child-age-icon {
+      font-size: 18px;
+    }
+    .child-age-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-text-dark);
+    }
+    .child-age-edit {
+      font-size: 12px;
+      color: var(--color-teal-dark);
+      font-weight: 500;
+      margin-left: var(--space-xs);
+      cursor: pointer;
+    }
+
+    /* Age Picker Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 1000;
+      animation: fadeIn 0.2s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+    .modal-content {
+      background-color: var(--color-navy);
+      border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+      width: 100%;
+      max-width: 430px;
+      max-height: 70vh;
+      overflow: hidden;
+      animation: slideUp 0.3s ease;
+    }
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-lg);
+      border-bottom: 1px solid var(--color-card-border);
+    }
+    .modal-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--color-text-secondary);
+      font-size: 24px;
+      cursor: pointer;
+      padding: var(--space-sm);
+      margin: -8px;
+      line-height: 1;
+    }
+    .modal-body {
+      padding: var(--space-lg);
+      overflow-y: auto;
+      max-height: 50vh;
+    }
+    .age-picker-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-sm);
+    }
+    .age-option {
+      padding: var(--space-md);
+      background-color: var(--color-card-bg);
+      border: 1px solid var(--color-card-border);
+      border-radius: var(--radius-md);
+      color: var(--color-text-primary);
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+    .age-option:active {
+      transform: scale(0.97);
+    }
+    .age-option.selected {
+      background-color: var(--color-teal);
+      border-color: var(--color-teal);
+      color: var(--color-text-dark);
+    }
+    .age-section-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: var(--space-sm);
+      margin-top: var(--space-lg);
+    }
+    .age-section-label:first-child {
+      margin-top: 0;
+    }
+    .modal-footer {
+      padding: var(--space-lg);
+      border-top: 1px solid var(--color-card-border);
+    }
+    .modal-footer .btn-primary {
+      width: 100%;
+      padding: var(--space-md);
+    }
+
+    /* Recommended Guide Card */
+    .recommended-section {
+      padding: var(--space-md) var(--space-md);
+      padding-bottom: 0;
+    }
+    .recommended-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: var(--space-sm);
+    }
+    .recommended-card {
+      background: linear-gradient(135deg, var(--color-teal) 0%, #14b8a6 100%);
+      border-radius: var(--radius-lg);
+      padding: var(--space-md);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-family: var(--font-family);
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+    .recommended-card:active {
+      transform: scale(0.98);
+    }
+    .recommended-card-icon {
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+    .recommended-card-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .recommended-card-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-text-dark);
+      margin: 0 0 2px 0;
+      line-height: 1.3;
+    }
+    .recommended-card-description {
+      font-size: 13px;
+      color: var(--color-text-dark-secondary);
+      margin: 0;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .recommended-card-arrow {
+      flex-shrink: 0;
+      color: var(--color-text-dark-secondary);
+    }
+
+    /* Search Bar */
+    .search-section {
+      padding: var(--space-md) var(--space-md);
+      padding-bottom: 0;
+    }
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      background-color: var(--color-card-bg);
+      border: 1px solid var(--color-card-border);
+      border-radius: var(--radius-full);
+      padding: var(--space-sm) var(--space-md);
+      width: 100%;
+      cursor: text;
+    }
+    .search-bar:focus-within {
+      border-color: var(--color-teal);
+      background-color: var(--color-navy-light);
+    }
+    .search-icon {
+      color: var(--color-text-muted);
+      flex-shrink: 0;
+    }
+    .search-input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--color-text-primary);
+      font-family: var(--font-family);
+      font-size: 15px;
+      min-height: 28px;
+    }
+    .search-input::placeholder {
+      color: var(--color-text-muted);
+    }
+    .search-container {
+      position: relative;
+    }
+    .search-suggestions {
+      position: absolute;
+      top: calc(100% + var(--space-sm));
+      left: 0;
+      right: 0;
+      background-color: var(--color-navy-light);
+      border: 1px solid var(--color-card-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      z-index: 100;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+    .search-suggestion {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-md);
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-family: var(--font-family);
+      cursor: pointer;
+      border-bottom: 1px solid var(--color-card-border);
+    }
+    .search-suggestion:last-child {
+      border-bottom: none;
+    }
+    .search-suggestion:active {
+      background-color: var(--color-card-bg);
+    }
+    .search-suggestion-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .search-suggestion-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .search-suggestion-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-text-primary);
+      margin: 0;
+    }
+    .search-suggestion-category {
+      font-size: 12px;
+      color: var(--color-text-muted);
+      margin-top: 2px;
+    }
+    .search-no-results {
+      padding: var(--space-lg);
+      text-align: center;
+      color: var(--color-text-muted);
+      font-size: 14px;
+    }
+
+    /* Lesson Player */
+    .lesson-player {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--color-navy);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      max-width: 430px;
+      margin: 0 auto;
+    }
+    .lesson-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: calc(var(--safe-area-top) + var(--space-md)) var(--space-md) var(--space-md);
+      border-bottom: 1px solid var(--color-card-border);
+    }
+    .lesson-close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background-color: var(--color-card-bg);
+      border: none;
+      border-radius: 50%;
+      color: var(--color-text-primary);
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .lesson-close:active {
+      background-color: var(--color-navy-light);
+    }
+    .lesson-progress {
+      flex: 1;
+      margin: 0 var(--space-md);
+    }
+    .lesson-progress-bar {
+      height: 4px;
+      background-color: var(--color-card-bg);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .lesson-progress-fill {
+      height: 100%;
+      background-color: var(--color-teal);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+    .lesson-progress-text {
+      font-size: 12px;
+      color: var(--color-text-muted);
+      text-align: center;
+      margin-top: var(--space-xs);
+    }
+    .lesson-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--space-xl) var(--space-lg);
+    }
+    .lesson-chapter-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-teal);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: var(--space-sm);
+    }
+    .lesson-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      margin: 0 0 var(--space-lg) 0;
+      line-height: 1.3;
+    }
+    .lesson-body {
+      font-size: 16px;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+    .lesson-body p {
+      margin-bottom: var(--space-md);
+    }
+    .lesson-tip {
+      background-color: var(--color-card-bg);
+      border-left: 3px solid var(--color-teal);
+      padding: var(--space-md);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      margin: var(--space-lg) 0;
+    }
+    .lesson-tip-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-teal);
+      margin-bottom: var(--space-xs);
+    }
+    .lesson-tip-text {
+      font-size: 14px;
+      color: var(--color-text-primary);
+      line-height: 1.5;
+    }
+    .lesson-footer {
+      padding: var(--space-md) var(--space-lg) calc(var(--safe-area-bottom) + var(--space-lg));
+      border-top: 1px solid var(--color-card-border);
+      display: flex;
+      gap: var(--space-sm);
+    }
+    .lesson-btn {
+      flex: 1;
+      padding: var(--space-md);
+      border-radius: var(--radius-full);
+      font-family: var(--font-family);
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .lesson-btn-secondary {
+      background-color: var(--color-card-bg);
+      border: 1px solid var(--color-card-border);
+      color: var(--color-text-primary);
+    }
+    .lesson-btn-secondary:active {
+      background-color: var(--color-navy-light);
+    }
+    .lesson-btn-primary {
+      background-color: var(--color-teal);
+      border: none;
+      color: var(--color-text-dark);
+    }
+    .lesson-btn-primary:active {
+      background-color: var(--color-teal-dark);
+    }
+    .section { padding: var(--space-lg) var(--space-md); }
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: var(--space-md);
+    }
+
+    /* Browse Tabs */
+    .browse-tabs {
+      display: flex;
+      gap: var(--space-sm);
+      padding: var(--space-md);
+      background-color: var(--color-navy-light);
+      border-radius: var(--radius-lg);
+      margin: var(--space-md);
+    }
+    .browse-tab {
+      flex: 1;
+      padding: var(--space-md) var(--space-sm);
+      border: none;
+      border-radius: var(--radius-md);
+      background-color: transparent;
+      color: var(--color-text-secondary);
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      min-height: 44px;
+    }
+    .browse-tab:active { transform: scale(0.98); }
+    .browse-tab.active {
+      background-color: var(--color-teal);
+      color: var(--color-text-dark);
+    }
+
+    /* Category Pills */
+    .category-pills-container {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      margin: 0 -16px;
+      padding: 0 16px;
+    }
+    .category-pills-container::-webkit-scrollbar { display: none; }
+    .category-pills {
+      display: flex;
+      gap: var(--space-sm);
+      padding: var(--space-sm) 0;
+    }
+    .category-pill {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: var(--space-sm) var(--space-md);
+      border: 1px solid var(--color-card-border);
+      border-radius: var(--radius-full);
+      background-color: var(--color-card-bg);
+      color: var(--color-text-secondary);
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      min-height: 44px;
+    }
+    .category-pill:active { transform: scale(0.97); }
+    .category-pill.active {
+      background-color: var(--color-cream);
+      border-color: var(--color-cream);
+      color: var(--color-text-dark);
+    }
+
+    /* Guide Card */
+    .guide-list { display: flex; flex-direction: column; gap: var(--space-md); }
+    .guide-card {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: var(--space-lg);
+      background-color: var(--color-card-bg);
+      border: 1px solid var(--color-card-border);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+      font-family: var(--font-family);
+    }
+    .guide-card:active {
+      transform: scale(0.99);
+      background-color: var(--color-navy-light);
+    }
+    .guide-card-content { flex: 1; min-width: 0; }
+    .guide-card-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin: 0 0 var(--space-xs) 0;
+      line-height: 1.3;
+    }
+    .guide-card-description {
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      margin: 0 0 var(--space-md) 0;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .guide-card-meta { display: flex; gap: var(--space-lg); }
+    .guide-card-meta span {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-size: 12px;
+      color: var(--color-text-muted);
+    }
+    .guide-card-meta svg { opacity: 0.7; }
+    .guide-card-arrow {
+      flex-shrink: 0;
+      margin-left: var(--space-md);
+      color: var(--color-text-muted);
+    }
+
+    /* Detail Page */
+    .detail-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: calc(var(--safe-area-top) + var(--space-md)) var(--space-md) var(--space-md);
+      background-color: var(--color-cream);
+    }
+    .back-button {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      background: none;
+      border: none;
+      color: var(--color-text-dark);
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      padding: var(--space-sm);
+      margin: -8px;
+      font-family: var(--font-family);
+    }
+    .back-button:active { opacity: 0.7; }
+    .detail-header-category {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-text-dark-secondary);
+    }
+    .guide-hero {
+      background-color: var(--color-cream);
+      padding: 0 var(--space-md) var(--space-xl);
+      border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+    }
+    .guide-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--color-text-dark);
+      margin: 0 0 var(--space-sm) 0;
+      line-height: 1.2;
+    }
+    .guide-description {
+      font-size: 16px;
+      color: var(--color-text-dark-secondary);
+      margin: 0 0 var(--space-lg) 0;
+      line-height: 1.5;
+    }
+    .guide-meta { display: flex; gap: var(--space-lg); }
+    .guide-meta-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-size: 14px;
+      color: var(--color-text-dark-secondary);
+    }
+    .guide-meta-item svg { opacity: 0.7; }
+    .guide-content { padding: var(--space-lg) 0; }
+    .chapters-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--space-md) var(--space-md);
+    }
+    .chapters-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin: 0;
+    }
+    .btn-primary {
+      padding: var(--space-sm) var(--space-lg);
+      background-color: var(--color-teal);
+      color: var(--color-text-dark);
+      border: none;
+      border-radius: var(--radius-full);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: var(--font-family);
+    }
+    .btn-primary:active { background-color: var(--color-teal-dark); }
+
+    /* Chapter List */
+    .chapter-list { display: flex; flex-direction: column; }
+    .chapter-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      width: 100%;
+      padding: var(--space-lg);
+      background: none;
+      border: none;
+      border-bottom: 1px solid var(--color-card-border);
+      cursor: pointer;
+      text-align: left;
+      font-family: var(--font-family);
+    }
+    .chapter-item:last-child { border-bottom: none; }
+    .chapter-item:active { background-color: var(--color-card-bg); }
+    .chapter-number {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--color-navy-light);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      flex-shrink: 0;
+    }
+    .chapter-content { flex: 1; min-width: 0; }
+    .chapter-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--color-text-primary);
+      margin: 0 0 var(--space-xs) 0;
+    }
+    .chapter-duration {
+      font-size: 14px;
+      color: var(--color-text-muted);
+    }
+    .chapter-action {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--color-teal);
+      border-radius: 50%;
+      color: var(--color-text-dark);
+    }
+    .chapter-action svg { margin-left: 2px; }
+
+    .guide-list-empty {
+      text-align: center;
+      padding: var(--space-xxl) var(--space-md);
+      color: var(--color-text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const { useState, useMemo } = React;
+
+    // Data
+    const BROWSE_MODES = { AGE: 'age', TOPIC: 'topic', SEASONAL: 'seasonal' };
+
+    const AGE_GROUPS = [
+      { id: '0-3m', label: '0-3 months', shortLabel: '0-3m' },
+      { id: '4-5m', label: '4-5 months', shortLabel: '4-5m' },
+      { id: '6-17m', label: '6-17 months', shortLabel: '6-17m' },
+      { id: '18m-3y', label: '18 months - 3 years', shortLabel: '18m-3y' },
+      { id: '3-5y', label: '3-5 years', shortLabel: '3-5y' },
+    ];
+
+    const TOPICS = [
+      { id: 'bedtime-battles', label: 'Bedtime battles', icon: '🌙' },
+      { id: 'early-waking', label: 'Early waking', icon: '🌅' },
+      { id: 'nap-transitions', label: 'Nap transitions', icon: '😴' },
+      { id: 'night-wakings', label: 'Night wakings', icon: '🌃' },
+      { id: 'sleep-regressions', label: 'Sleep regressions', icon: '📉' },
+    ];
+
+    const SEASONAL = [
+      { id: 'travel', label: 'Travel sleep', icon: '✈️' },
+      { id: 'daylight-saving', label: 'Daylight saving', icon: '🕐' },
+      { id: 'holidays', label: 'Holiday disruptions', icon: '🎄' },
+      { id: 'new-sibling', label: 'New sibling', icon: '👶' },
+    ];
+
+    const GUIDES = [
+      // Age: 0-3m
+      { id: 'newborn-sleep-foundations', title: 'Newborn Sleep Foundations', description: 'Everything you need to know about sleep in the first 3 months', category: 'age', categoryId: '0-3m', chapters: 6, duration: 25, chapterList: [
+        { id: 1, title: 'Understanding newborn sleep', duration: 4 },
+        { id: 2, title: 'Safe sleep basics', duration: 5 },
+        { id: 3, title: 'Day vs night confusion', duration: 4 },
+        { id: 4, title: 'Feeding and sleep connection', duration: 4 },
+        { id: 5, title: 'Creating a sleep-friendly environment', duration: 4 },
+        { id: 6, title: 'Realistic expectations', duration: 4 },
+      ]},
+      { id: 'soothing-techniques', title: 'Soothing Techniques for Newborns', description: 'Gentle ways to help your newborn settle and sleep', category: 'age', categoryId: '0-3m', chapters: 5, duration: 18, chapterList: [
+        { id: 1, title: "The 5 S's method", duration: 4 },
+        { id: 2, title: 'Swaddling basics', duration: 3 },
+        { id: 3, title: 'White noise and shushing', duration: 3 },
+        { id: 4, title: 'Motion and holding', duration: 4 },
+        { id: 5, title: 'When nothing works', duration: 4 },
+      ]},
+      // Age: 4-5m
+      { id: 'sleep-training-intro', title: 'Introduction to Sleep Training', description: 'Gentle methods to help your baby learn independent sleep', category: 'age', categoryId: '4-5m', chapters: 7, duration: 30, chapterList: [
+        { id: 1, title: 'Is your baby ready?', duration: 4 },
+        { id: 2, title: 'Sleep training methods overview', duration: 5 },
+        { id: 3, title: 'The pick up/put down method', duration: 5 },
+        { id: 4, title: 'Chair method explained', duration: 4 },
+        { id: 5, title: 'Ferber method basics', duration: 4 },
+        { id: 6, title: 'Creating your plan', duration: 4 },
+        { id: 7, title: 'Troubleshooting common issues', duration: 4 },
+      ]},
+      { id: '4-month-regression', title: 'Surviving the 4-Month Regression', description: 'Why it happens and how to get through it', category: 'age', categoryId: '4-5m', chapters: 5, duration: 20, chapterList: [
+        { id: 1, title: 'What is the 4-month regression?', duration: 4 },
+        { id: 2, title: 'Signs your baby is going through it', duration: 3 },
+        { id: 3, title: 'Survival strategies', duration: 5 },
+        { id: 4, title: 'Sleep associations to watch for', duration: 4 },
+        { id: 5, title: 'Coming out the other side', duration: 4 },
+      ]},
+      // Age: 6-17m
+      { id: 'dropping-night-feeds', title: 'Dropping Night Feeds', description: 'When and how to wean off nighttime feedings', category: 'age', categoryId: '6-17m', chapters: 5, duration: 22, chapterList: [
+        { id: 1, title: 'Signs baby is ready', duration: 4 },
+        { id: 2, title: 'Gradual reduction method', duration: 5 },
+        { id: 3, title: 'Cold turkey approach', duration: 4 },
+        { id: 4, title: 'Increasing daytime calories', duration: 5 },
+        { id: 5, title: 'Handling setbacks', duration: 4 },
+      ]},
+      // Age: 6-17m
+      { id: 'toddler-sleep-basics', title: 'Toddler Sleep Basics', description: 'Navigating sleep with your newly mobile toddler', category: 'age', categoryId: '6-17m', chapters: 6, duration: 24, chapterList: [
+        { id: 1, title: 'Sleep needs at this age', duration: 4 },
+        { id: 2, title: 'Ideal schedules', duration: 4 },
+        { id: 3, title: 'Separation anxiety and sleep', duration: 4 },
+        { id: 4, title: 'Keeping toddlers in cribs', duration: 4 },
+        { id: 5, title: 'Dealing with testing behaviors', duration: 4 },
+        { id: 6, title: 'Sleep environment updates', duration: 4 },
+      ]},
+      // Age: 18m-3y
+      { id: '18-month-regression', title: 'The 18-Month Sleep Regression', description: 'Understanding and surviving this challenging phase', category: 'age', categoryId: '18m-3y', chapters: 5, duration: 18, chapterList: [
+        { id: 1, title: 'Why 18 months is tough', duration: 3 },
+        { id: 2, title: 'Language explosion impact', duration: 4 },
+        { id: 3, title: 'Teething and molars', duration: 3 },
+        { id: 4, title: 'Maintaining boundaries', duration: 4 },
+        { id: 5, title: 'When to seek help', duration: 4 },
+      ]},
+      // Age: 18m-3y
+      { id: 'crib-to-bed', title: 'Crib to Bed Transition', description: 'Making the move to a big kid bed successfully', category: 'age', categoryId: '18m-3y', chapters: 6, duration: 22, chapterList: [
+        { id: 1, title: 'When to make the switch', duration: 3 },
+        { id: 2, title: 'Preparing your child', duration: 4 },
+        { id: 3, title: 'Setting up the room safely', duration: 4 },
+        { id: 4, title: 'The first few nights', duration: 4 },
+        { id: 5, title: 'Handling curtain calls', duration: 4 },
+        { id: 6, title: 'Staying consistent', duration: 3 },
+      ]},
+      // Age: 3-5y
+      { id: 'preschooler-bedtime', title: 'Preschooler Bedtime Mastery', description: 'Creating peaceful bedtimes with your 3-5 year old', category: 'age', categoryId: '3-5y', chapters: 5, duration: 20, chapterList: [
+        { id: 1, title: 'Understanding preschool sleep needs', duration: 4 },
+        { id: 2, title: 'Building an effective routine', duration: 4 },
+        { id: 3, title: 'Managing stall tactics', duration: 4 },
+        { id: 4, title: 'Nighttime fears and nightmares', duration: 4 },
+        { id: 5, title: 'Reward systems that work', duration: 4 },
+      ]},
+      // Age: 3-5y
+      { id: 'school-ready-sleep', title: 'School-Ready Sleep Habits', description: 'Preparing sleep schedules for kindergarten', category: 'age', categoryId: '3-5y', chapters: 4, duration: 16, chapterList: [
+        { id: 1, title: 'Sleep needs for school success', duration: 4 },
+        { id: 2, title: 'Adjusting to early wake times', duration: 4 },
+        { id: 3, title: 'Weekend vs weekday schedules', duration: 4 },
+        { id: 4, title: 'Building independence', duration: 4 },
+      ]},
+      // Topic: Bedtime battles
+      { id: 'ending-bedtime-battles', title: 'Ending Bedtime Battles', description: 'Strategies to make bedtime peaceful again', category: 'topic', categoryId: 'bedtime-battles', chapters: 6, duration: 25, chapterList: [
+        { id: 1, title: 'Understanding why battles happen', duration: 4 },
+        { id: 2, title: 'The ideal bedtime routine', duration: 4 },
+        { id: 3, title: 'Setting clear boundaries', duration: 5 },
+        { id: 4, title: 'Positive reinforcement techniques', duration: 4 },
+        { id: 5, title: 'Handling meltdowns', duration: 4 },
+        { id: 6, title: 'Consistency is key', duration: 4 },
+      ]},
+      // Topic: Early waking
+      { id: 'early-morning-wakings', title: 'Solving Early Morning Wakings', description: 'Help your child sleep past 5am', category: 'topic', categoryId: 'early-waking', chapters: 5, duration: 20, chapterList: [
+        { id: 1, title: 'Common causes of early waking', duration: 4 },
+        { id: 2, title: 'Environmental fixes', duration: 4 },
+        { id: 3, title: 'Schedule adjustments', duration: 4 },
+        { id: 4, title: 'OK-to-wake clocks', duration: 4 },
+        { id: 5, title: 'When early waking is normal', duration: 4 },
+      ]},
+      // Topic: Nap transitions
+      { id: 'nap-transition-guide', title: 'Complete Nap Transition Guide', description: 'Navigate every nap transition from 4 to 1 to none', category: 'topic', categoryId: 'nap-transitions', chapters: 6, duration: 26, chapterList: [
+        { id: 1, title: '4 to 3 nap transition', duration: 4 },
+        { id: 2, title: '3 to 2 nap transition', duration: 4 },
+        { id: 3, title: '2 to 1 nap transition', duration: 5 },
+        { id: 4, title: 'Dropping the final nap', duration: 5 },
+        { id: 5, title: 'Signs vs false alarms', duration: 4 },
+        { id: 6, title: 'Schedule adjustments during transitions', duration: 4 },
+      ]},
+      // Topic: Night wakings
+      { id: 'night-waking-solutions', title: 'Night Waking Solutions', description: 'Get everyone sleeping through the night', category: 'topic', categoryId: 'night-wakings', chapters: 6, duration: 24, chapterList: [
+        { id: 1, title: 'Why babies wake at night', duration: 4 },
+        { id: 2, title: 'Hunger vs habit wakings', duration: 4 },
+        { id: 3, title: 'Breaking sleep associations', duration: 4 },
+        { id: 4, title: 'Responding to wakings', duration: 4 },
+        { id: 5, title: 'Gradual night weaning', duration: 4 },
+        { id: 6, title: 'When wakings are medical', duration: 4 },
+      ]},
+      // Topic: Sleep regressions
+      { id: 'sleep-regression-survival', title: 'Sleep Regression Survival Guide', description: 'Get through every regression with your sanity intact', category: 'topic', categoryId: 'sleep-regressions', chapters: 7, duration: 28, chapterList: [
+        { id: 1, title: 'What causes regressions', duration: 4 },
+        { id: 2, title: 'The 4-month regression', duration: 4 },
+        { id: 3, title: 'The 8-10 month regression', duration: 4 },
+        { id: 4, title: 'The 12-month regression', duration: 4 },
+        { id: 5, title: 'The 18-month regression', duration: 4 },
+        { id: 6, title: 'The 2-year regression', duration: 4 },
+        { id: 7, title: 'General survival strategies', duration: 4 },
+      ]},
+      // Seasonal: Travel
+      { id: 'travel-sleep-guide', title: 'Travel Sleep Guide', description: 'Maintain good sleep habits on the go', category: 'seasonal', categoryId: 'travel', chapters: 6, duration: 24, chapterList: [
+        { id: 1, title: 'Preparing for travel', duration: 4 },
+        { id: 2, title: 'Sleep on planes and in cars', duration: 4 },
+        { id: 3, title: 'Setting up sleep spaces away from home', duration: 4 },
+        { id: 4, title: 'Managing time zone changes', duration: 4 },
+        { id: 5, title: 'Sticking to routines (mostly)', duration: 4 },
+        { id: 6, title: 'Getting back on track after travel', duration: 4 },
+      ]},
+      // Seasonal: Daylight saving
+      { id: 'daylight-saving-guide', title: 'Daylight Saving Transitions', description: "Adjust your child's schedule smoothly", category: 'seasonal', categoryId: 'daylight-saving', chapters: 4, duration: 15, chapterList: [
+        { id: 1, title: 'Spring forward strategy', duration: 4 },
+        { id: 2, title: 'Fall back strategy', duration: 4 },
+        { id: 3, title: 'Gradual vs cold turkey approach', duration: 3 },
+        { id: 4, title: 'Recovery timeline expectations', duration: 4 },
+      ]},
+      // Seasonal: Holidays
+      { id: 'holiday-sleep-survival', title: 'Holiday Sleep Survival', description: 'Navigate parties, visitors, and excitement', category: 'seasonal', categoryId: 'holidays', chapters: 5, duration: 18, chapterList: [
+        { id: 1, title: 'Managing overstimulation', duration: 4 },
+        { id: 2, title: 'Flexible schedules that work', duration: 4 },
+        { id: 3, title: 'Sleep with visitors around', duration: 3 },
+        { id: 4, title: 'Saying no to late nights', duration: 3 },
+        { id: 5, title: 'Post-holiday recovery', duration: 4 },
+      ]},
+      // Seasonal: New sibling
+      { id: 'new-sibling-sleep', title: 'Sleep with a New Sibling', description: 'Help your older child adjust when baby arrives', category: 'seasonal', categoryId: 'new-sibling', chapters: 5, duration: 20, chapterList: [
+        { id: 1, title: 'Preparing before baby arrives', duration: 4 },
+        { id: 2, title: 'Managing regression', duration: 4 },
+        { id: 3, title: 'Room sharing decisions', duration: 4 },
+        { id: 4, title: 'Balancing two bedtimes', duration: 4 },
+        { id: 5, title: 'Finding your new normal', duration: 4 },
+      ]},
+    ];
+
+    const getGuidesByCategory = (category, categoryId) =>
+      GUIDES.filter(g => g.category === category && g.categoryId === categoryId);
+
+    const getGuideById = (id) => GUIDES.find(g => g.id === id);
+
+    const getCategoryLabel = (category, categoryId) => {
+      if (category === 'age') return AGE_GROUPS.find(a => a.id === categoryId)?.label || categoryId;
+      if (category === 'topic') return TOPICS.find(t => t.id === categoryId)?.label || categoryId;
+      if (category === 'seasonal') return SEASONAL.find(s => s.id === categoryId)?.label || categoryId;
+      return categoryId;
+    };
+
+    // Icons
+    const ChevronIcon = () => (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <polyline points="9 18 15 12 9 6" />
+      </svg>
+    );
+    const BackIcon = () => (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <polyline points="15 18 9 12 15 6" />
+      </svg>
+    );
+    const BookIcon = () => (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+      </svg>
+    );
+    const ClockIcon = () => (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16 14" />
+      </svg>
+    );
+    const PlayIcon = () => (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M8 5v14l11-7z" />
+      </svg>
+    );
+    const SearchIcon = () => (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <circle cx="11" cy="11" r="8" />
+        <path d="m21 21-4.35-4.35" />
+      </svg>
+    );
+
+    // Search suggestions data
+    const SEARCH_SUGGESTIONS = [
+      { id: '4-month-regression', icon: '🌙', title: 'Baby waking up more than usual', category: 'Sleep regressions', keywords: ['waking', 'regression', '4 month', 'sleep worse', 'not sleeping'] },
+      { id: 'newborn-sleep-foundations', icon: '👶', title: 'Newborn won\'t sleep', category: '0-3 months', keywords: ['newborn', 'won\'t sleep', 'new baby', 'first weeks'] },
+      { id: 'ending-bedtime-battles', icon: '😫', title: 'Bedtime takes forever', category: 'Bedtime battles', keywords: ['bedtime', 'fighting sleep', 'won\'t go to bed', 'battles', 'struggles'] },
+      { id: 'early-morning-wakings', icon: '🌅', title: 'Baby waking too early', category: 'Early waking', keywords: ['early', 'morning', '5am', '4am', 'waking up early', 'too early'] },
+      { id: 'night-waking-solutions', icon: '🌃', title: 'Multiple night wakings', category: 'Night wakings', keywords: ['night', 'waking', 'multiple', 'keeps waking', 'every hour', 'won\'t stay asleep'] },
+      { id: 'nap-transition-guide', icon: '😴', title: 'Naps are a mess', category: 'Nap transitions', keywords: ['nap', 'naps', 'short naps', 'won\'t nap', 'fighting naps', 'transition'] },
+      { id: 'dropping-night-feeds', icon: '🍼', title: 'Still feeding at night', category: '6-17 months', keywords: ['night feed', 'feeding', 'hungry', 'still eating', 'wean'] },
+      { id: 'sleep-training-intro', icon: '💪', title: 'Ready to sleep train', category: '4-5 months', keywords: ['sleep train', 'training', 'teach', 'independent', 'self soothe'] },
+      { id: 'crib-to-bed', icon: '🛏️', title: 'Moving to a big kid bed', category: '18m-3 years', keywords: ['crib', 'bed', 'toddler bed', 'big kid', 'climbing out'] },
+      { id: '18-month-regression', icon: '😩', title: '18 month old won\'t sleep', category: 'Sleep regressions', keywords: ['18 month', 'toddler', 'regression', 'fighting sleep'] },
+      { id: 'travel-sleep-guide', icon: '✈️', title: 'Traveling with baby', category: 'Travel', keywords: ['travel', 'vacation', 'trip', 'airplane', 'hotel', 'visiting'] },
+      { id: 'soothing-techniques', icon: '🤱', title: 'Can\'t get baby to calm down', category: '0-3 months', keywords: ['soothe', 'calm', 'crying', 'fussy', 'won\'t stop', 'settle'] },
+    ];
+
+    // Components
+    const SearchBar = ({ onSelectGuide }) => {
+      const [query, setQuery] = useState('');
+      const [isFocused, setIsFocused] = useState(false);
+
+      const filteredSuggestions = useMemo(() => {
+        if (!query.trim()) return [];
+        const lowerQuery = query.toLowerCase();
+        return SEARCH_SUGGESTIONS.filter(s =>
+          s.title.toLowerCase().includes(lowerQuery) ||
+          s.category.toLowerCase().includes(lowerQuery) ||
+          s.keywords.some(k => k.toLowerCase().includes(lowerQuery))
+        ).slice(0, 5);
+      }, [query]);
+
+      const showSuggestions = isFocused && query.trim().length > 0;
+
+      const handleSelect = (guideId) => {
+        setQuery('');
+        setIsFocused(false);
+        onSelectGuide(guideId);
+      };
+
+      return (
+        <div className="search-container">
+          <div className="search-bar">
+            <span className="search-icon"><SearchIcon /></span>
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Help me with..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setTimeout(() => setIsFocused(false), 200)}
+            />
+          </div>
+          {showSuggestions && (
+            <div className="search-suggestions">
+              {filteredSuggestions.length > 0 ? (
+                filteredSuggestions.map(suggestion => (
+                  <button
+                    key={suggestion.id}
+                    className="search-suggestion"
+                    onClick={() => handleSelect(suggestion.id)}
+                  >
+                    <span className="search-suggestion-icon">{suggestion.icon}</span>
+                    <div className="search-suggestion-content">
+                      <div className="search-suggestion-title">{suggestion.title}</div>
+                      <div className="search-suggestion-category">{suggestion.category}</div>
+                    </div>
+                  </button>
+                ))
+              ) : (
+                <div className="search-no-results">No results found</div>
+              )}
+            </div>
+          )}
+        </div>
+      );
+    };
+
+    const BrowseTabs = ({ activeMode, onModeChange }) => (
+      <div className="browse-tabs">
+        {[
+          { id: BROWSE_MODES.AGE, label: 'By Age' },
+          { id: BROWSE_MODES.TOPIC, label: 'By Topic' },
+          { id: BROWSE_MODES.SEASONAL, label: 'Seasonal' },
+        ].map(tab => (
+          <button
+            key={tab.id}
+            className={`browse-tab ${activeMode === tab.id ? 'active' : ''}`}
+            onClick={() => onModeChange(tab.id)}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+    );
+
+    const CategoryPills = ({ categories, activeCategory, onCategoryChange }) => (
+      <div className="category-pills-container">
+        <div className="category-pills">
+          {categories.map(cat => (
+            <button
+              key={cat.id}
+              className={`category-pill ${activeCategory === cat.id ? 'active' : ''}`}
+              onClick={() => onCategoryChange(cat.id)}
+            >
+              {cat.icon && <span>{cat.icon}</span>}
+              <span>{cat.shortLabel || cat.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    );
+
+    const GuideCard = ({ guide, onSelect }) => (
+      <button className="guide-card" onClick={() => onSelect(guide.id)}>
+        <div className="guide-card-content">
+          <h3 className="guide-card-title">{guide.title}</h3>
+          <p className="guide-card-description">{guide.description}</p>
+          <div className="guide-card-meta">
+            <span><BookIcon /> {guide.chapters} chapters</span>
+            <span><ClockIcon /> {guide.duration} min</span>
+          </div>
+        </div>
+        <div className="guide-card-arrow"><ChevronIcon /></div>
+      </button>
+    );
+
+    // Sample lesson content for demo
+    const LESSON_CONTENT = {
+      default: {
+        intro: "This chapter will help you understand key concepts and practical strategies you can start using today.",
+        body: "Every child is different, and what works for one family may not work for another. The goal is to find approaches that align with your parenting style while meeting your child's developmental needs.\n\nResearch shows that consistent routines and responsive parenting are the foundations of healthy sleep. As you go through this guide, remember that progress isn't always linear—setbacks are normal and expected.",
+        tip: "Start with one small change at a time. Trying to change everything at once can be overwhelming for both you and your child."
+      }
+    };
+
+    const LessonPlayer = ({ guide, chapter, chapterIndex, totalChapters, onClose, onNext, onPrev }) => {
+      const progress = ((chapterIndex + 1) / totalChapters) * 100;
+      const content = LESSON_CONTENT.default;
+      const isFirstChapter = chapterIndex === 0;
+      const isLastChapter = chapterIndex === totalChapters - 1;
+
+      return (
+        <div className="lesson-player">
+          <div className="lesson-header">
+            <button className="lesson-close" onClick={onClose}>×</button>
+            <div className="lesson-progress">
+              <div className="lesson-progress-bar">
+                <div className="lesson-progress-fill" style={{ width: `${progress}%` }} />
+              </div>
+              <div className="lesson-progress-text">{chapterIndex + 1} of {totalChapters}</div>
+            </div>
+            <div style={{ width: 36 }} />
+          </div>
+          <div className="lesson-content">
+            <div className="lesson-chapter-label">Chapter {chapterIndex + 1}</div>
+            <h1 className="lesson-title">{chapter.title}</h1>
+            <div className="lesson-body">
+              <p>{content.intro}</p>
+              <p>{content.body.split('\n\n')[0]}</p>
+              <div className="lesson-tip">
+                <div className="lesson-tip-label">Pro Tip</div>
+                <div className="lesson-tip-text">{content.tip}</div>
+              </div>
+              <p>{content.body.split('\n\n')[1]}</p>
+            </div>
+          </div>
+          <div className="lesson-footer">
+            {!isFirstChapter && (
+              <button className="lesson-btn lesson-btn-secondary" onClick={onPrev}>
+                Previous
+              </button>
+            )}
+            <button className="lesson-btn lesson-btn-primary" onClick={isLastChapter ? onClose : onNext}>
+              {isLastChapter ? 'Finish Guide' : 'Next Chapter'}
+            </button>
+          </div>
+        </div>
+      );
+    };
+
+    const ChapterList = ({ chapters, onChapterClick }) => (
+      <div className="chapter-list">
+        {chapters.map((chapter, index) => (
+          <button key={chapter.id} className="chapter-item" onClick={() => onChapterClick(index)}>
+            <div className="chapter-number">{index + 1}</div>
+            <div className="chapter-content">
+              <h4 className="chapter-title">{chapter.title}</h4>
+              <span className="chapter-duration">{chapter.duration} min</span>
+            </div>
+            <div className="chapter-action"><PlayIcon /></div>
+          </button>
+        ))}
+      </div>
+    );
+
+    // Age Picker Component
+    const AgePicker = ({ currentAge, onSelectAge, onClose }) => {
+      const [selectedAge, setSelectedAge] = useState(currentAge);
+
+      const monthOptions = Array.from({ length: 12 }, (_, i) => i);
+      const olderMonthOptions = Array.from({ length: 12 }, (_, i) => i + 12);
+      const yearOptions = [2, 3, 4, 5];
+
+      const formatAge = (months) => {
+        if (months < 12) return `${months}m`;
+        if (months < 24) return `${months}m`;
+        return `${Math.floor(months / 12)}y`;
+      };
+
+      const handleSave = () => {
+        onSelectAge(selectedAge);
+        onClose();
+      };
+
+      return (
+        <div className="modal-overlay" onClick={onClose}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <div className="modal-header">
+              <span className="modal-title">Child's Age</span>
+              <button className="modal-close" onClick={onClose}>×</button>
+            </div>
+            <div className="modal-body">
+              <div className="age-section-label">0-11 months</div>
+              <div className="age-picker-grid">
+                {monthOptions.map(month => (
+                  <button
+                    key={month}
+                    className={`age-option ${selectedAge === month ? 'selected' : ''}`}
+                    onClick={() => setSelectedAge(month)}
+                  >
+                    {month}m
+                  </button>
+                ))}
+              </div>
+              <div className="age-section-label">12-23 months</div>
+              <div className="age-picker-grid">
+                {olderMonthOptions.map(month => (
+                  <button
+                    key={month}
+                    className={`age-option ${selectedAge === month ? 'selected' : ''}`}
+                    onClick={() => setSelectedAge(month)}
+                  >
+                    {month}m
+                  </button>
+                ))}
+              </div>
+              <div className="age-section-label">2-5 years</div>
+              <div className="age-picker-grid">
+                {yearOptions.map(year => (
+                  <button
+                    key={year}
+                    className={`age-option ${selectedAge === year * 12 ? 'selected' : ''}`}
+                    onClick={() => setSelectedAge(year * 12)}
+                  >
+                    {year} yrs
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button className="btn-primary" onClick={handleSave}>Save</button>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    // Pages
+    const getAgeGroupForChild = (ageMonths) => {
+      if (ageMonths <= 3) return '0-3m';
+      if (ageMonths <= 5) return '4-5m';
+      if (ageMonths <= 17) return '6-17m';
+      if (ageMonths <= 36) return '18m-3y';
+      return '3-5y';
+    };
+
+    // Get recommended guide based on child's age
+    const getRecommendedGuide = (ageMonths) => {
+      // Age-specific recommendations
+      if (ageMonths >= 3 && ageMonths <= 5) {
+        return {
+          id: '4-month-regression',
+          icon: '🌙',
+          title: 'Navigating the 4-Month Sleep Regression',
+          description: 'Your baby is at the perfect age to learn about this major sleep milestone.',
+          chapters: 5,
+          duration: 20,
+        };
+      }
+      if (ageMonths >= 0 && ageMonths <= 2) {
+        return {
+          id: 'newborn-sleep-foundations',
+          icon: '👶',
+          title: 'Newborn Sleep Foundations',
+          description: 'Essential knowledge for navigating sleep in these early weeks.',
+          chapters: 6,
+          duration: 25,
+        };
+      }
+      if (ageMonths >= 6 && ageMonths <= 9) {
+        return {
+          id: 'dropping-night-feeds',
+          icon: '🍼',
+          title: 'Dropping Night Feeds',
+          description: 'Your baby may be ready to start weaning off nighttime feedings.',
+          chapters: 5,
+          duration: 22,
+        };
+      }
+      if (ageMonths >= 10 && ageMonths <= 14) {
+        return {
+          id: 'toddler-sleep-basics',
+          icon: '🧸',
+          title: 'Toddler Sleep Basics',
+          description: 'Navigate sleep with your increasingly mobile little one.',
+          chapters: 6,
+          duration: 24,
+        };
+      }
+      if (ageMonths >= 15 && ageMonths <= 20) {
+        return {
+          id: '18-month-regression',
+          icon: '😴',
+          title: 'The 18-Month Sleep Regression',
+          description: 'Prepare for or navigate this challenging developmental phase.',
+          chapters: 5,
+          duration: 18,
+        };
+      }
+      if (ageMonths >= 21 && ageMonths <= 36) {
+        return {
+          id: 'crib-to-bed',
+          icon: '🛏️',
+          title: 'Crib to Bed Transition',
+          description: 'Is your toddler ready for a big kid bed? Find out how to make the switch.',
+          chapters: 6,
+          duration: 22,
+        };
+      }
+      // 3-5 years
+      return {
+        id: 'preschooler-bedtime',
+        icon: '⭐',
+        title: 'Preschooler Bedtime Mastery',
+        description: 'Create peaceful bedtimes and tackle common challenges at this age.',
+        chapters: 5,
+        duration: 20,
+      };
+    };
+
+    const RecommendedCard = ({ guide, onSelect }) => (
+      <button className="recommended-card" onClick={() => onSelect(guide.id)}>
+        <div className="recommended-card-icon">{guide.icon}</div>
+        <div className="recommended-card-content">
+          <h3 className="recommended-card-title">{guide.title}</h3>
+          <p className="recommended-card-description">{guide.chapters} chapters · {guide.duration} min</p>
+        </div>
+        <div className="recommended-card-arrow"><ChevronIcon /></div>
+      </button>
+    );
+
+    const formatChildAge = (months) => {
+      if (months < 12) {
+        return `${months} month${months !== 1 ? 's' : ''} old`;
+      } else if (months < 24) {
+        return `${months} months old`;
+      } else {
+        const years = Math.floor(months / 12);
+        return `${years} year${years !== 1 ? 's' : ''} old`;
+      }
+    };
+
+    const HomePage = ({ onSelectGuide }) => {
+      const [browseMode, setBrowseMode] = useState(BROWSE_MODES.AGE);
+      const [childAge, setChildAge] = useState(4); // Default: 4 months
+      const [showAgePicker, setShowAgePicker] = useState(false);
+      const [selectedCategory, setSelectedCategory] = useState(getAgeGroupForChild(4));
+
+      const categories = useMemo(() => {
+        switch (browseMode) {
+          case BROWSE_MODES.AGE: return AGE_GROUPS;
+          case BROWSE_MODES.TOPIC: return TOPICS;
+          case BROWSE_MODES.SEASONAL: return SEASONAL;
+          default: return AGE_GROUPS;
+        }
+      }, [browseMode]);
+
+      const handleModeChange = (mode) => {
+        setBrowseMode(mode);
+        if (mode === BROWSE_MODES.AGE) setSelectedCategory(getAgeGroupForChild(childAge));
+        else if (mode === BROWSE_MODES.TOPIC) setSelectedCategory(TOPICS[0].id);
+        else setSelectedCategory(SEASONAL[0].id);
+      };
+
+      const handleAgeChange = (newAge) => {
+        setChildAge(newAge);
+        if (browseMode === BROWSE_MODES.AGE) {
+          setSelectedCategory(getAgeGroupForChild(newAge));
+        }
+      };
+
+      const guides = useMemo(() =>
+        getGuidesByCategory(browseMode, selectedCategory),
+        [browseMode, selectedCategory]
+      );
+
+      const recommendedGuide = useMemo(() =>
+        getRecommendedGuide(childAge),
+        [childAge]
+      );
+
+      const currentCategoryLabel = useMemo(() =>
+        categories.find(c => c.id === selectedCategory)?.label || '',
+        [categories, selectedCategory]
+      );
+
+      return (
+        <div className="page">
+          <header className="header">
+            <h1 className="header-title">Sleep Help</h1>
+            <p className="header-subtitle">Browse guides to help your little one sleep better</p>
+            <div className="child-age-badge" onClick={() => setShowAgePicker(true)}>
+              <span className="child-age-icon">👶</span>
+              <span className="child-age-text">{formatChildAge(childAge)}</span>
+              <span className="child-age-edit">Edit</span>
+            </div>
+          </header>
+          {showAgePicker && (
+            <AgePicker
+              currentAge={childAge}
+              onSelectAge={handleAgeChange}
+              onClose={() => setShowAgePicker(false)}
+            />
+          )}
+          <section className="search-section">
+            <SearchBar onSelectGuide={onSelectGuide} />
+          </section>
+          <section className="recommended-section">
+            <div className="recommended-label">Recommended for you</div>
+            <RecommendedCard guide={recommendedGuide} onSelect={onSelectGuide} />
+          </section>
+          <BrowseTabs activeMode={browseMode} onModeChange={handleModeChange} />
+          <section className="section" style={{paddingTop: 0}}>
+            <CategoryPills
+              categories={categories}
+              activeCategory={selectedCategory}
+              onCategoryChange={setSelectedCategory}
+            />
+          </section>
+          <section className="section" style={{paddingTop: 0}}>
+            <h2 className="section-title">{currentCategoryLabel}</h2>
+            <div className="guide-list">
+              {guides.length > 0 ? (
+                guides.map(guide => (
+                  <GuideCard key={guide.id} guide={guide} onSelect={onSelectGuide} />
+                ))
+              ) : (
+                <div className="guide-list-empty"><p>No guides available yet.</p></div>
+              )}
+            </div>
+          </section>
+        </div>
+      );
+    };
+
+    const GuideDetailPage = ({ guideId, onBack }) => {
+      const guide = getGuideById(guideId);
+      const [currentChapter, setCurrentChapter] = useState(null);
+
+      if (!guide) {
+        return (
+          <div className="page">
+            <header className="detail-header">
+              <button className="back-button" onClick={onBack}>
+                <BackIcon /><span>Back</span>
+              </button>
+            </header>
+            <div className="guide-list-empty"><p>Guide not found</p></div>
+          </div>
+        );
+      }
+
+      const categoryLabel = getCategoryLabel(guide.category, guide.categoryId);
+
+      const handleStartGuide = () => setCurrentChapter(0);
+      const handleChapterClick = (index) => setCurrentChapter(index);
+      const handleCloseLesson = () => setCurrentChapter(null);
+      const handleNextChapter = () => setCurrentChapter(prev => Math.min(prev + 1, guide.chapterList.length - 1));
+      const handlePrevChapter = () => setCurrentChapter(prev => Math.max(prev - 1, 0));
+
+      return (
+        <div className="page">
+          {currentChapter !== null && (
+            <LessonPlayer
+              guide={guide}
+              chapter={guide.chapterList[currentChapter]}
+              chapterIndex={currentChapter}
+              totalChapters={guide.chapterList.length}
+              onClose={handleCloseLesson}
+              onNext={handleNextChapter}
+              onPrev={handlePrevChapter}
+            />
+          )}
+          <header className="detail-header">
+            <button className="back-button" onClick={onBack}>
+              <BackIcon /><span>Back</span>
+            </button>
+            <span className="detail-header-category">{categoryLabel}</span>
+          </header>
+          <div className="guide-hero">
+            <h1 className="guide-title">{guide.title}</h1>
+            <p className="guide-description">{guide.description}</p>
+            <div className="guide-meta">
+              <div className="guide-meta-item"><BookIcon /><span>{guide.chapters} chapters</span></div>
+              <div className="guide-meta-item"><ClockIcon /><span>{guide.duration} min total</span></div>
+            </div>
+          </div>
+          <div className="guide-content">
+            <div className="chapters-header">
+              <h2 className="chapters-title">Chapters</h2>
+              <button className="btn-primary" onClick={handleStartGuide}>Start Guide</button>
+            </div>
+            <ChapterList chapters={guide.chapterList} onChapterClick={handleChapterClick} />
+          </div>
+        </div>
+      );
+    };
+
+    // App
+    const App = () => {
+      const [currentGuide, setCurrentGuide] = useState(null);
+
+      return (
+        <div className="app-container">
+          {currentGuide ? (
+            <GuideDetailPage guideId={currentGuide} onBack={() => setCurrentGuide(null)} />
+          ) : (
+            <HomePage onSelectGuide={setCurrentGuide} />
+          )}
+        </div>
+      );
+    };
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
