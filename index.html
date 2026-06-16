@@ -2050,8 +2050,7 @@
       <button className="guide-card" onClick={() => onSelect(guideId, chapterIndex)}>
         <div className="guide-card-content">
           <h3 className="guide-card-title">{chapter.title}</h3>
-          {chapter.subtitle && <p className="guide-card-description">{chapter.subtitle}</p>}
-          {chapter.description && !chapter.subtitle && <p className="guide-card-description">{chapter.description}</p>}
+
           <div className="guide-card-meta">
             {chapter.lessons && chapter.lessons.length > 0 && (
               <span><BookIcon /> {chapter.lessons.length} lessons</span>
