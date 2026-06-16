@@ -2819,7 +2819,7 @@
       // Determine if we're showing Contentful or sample content
       const isNapTransitions = browseMode === BROWSE_MODES.TOPIC && selectedCategory === 'nap-transitions';
       const isSampleCategory = browseMode === BROWSE_MODES.SEASONAL ||
-        (browseMode === BROWSE_MODES.AGE && (selectedCategory === '18m-3y' || selectedCategory === '3-5y')) ||
+        (browseMode === BROWSE_MODES.AGE && selectedCategory === '3-5y') ||
         (browseMode === BROWSE_MODES.TOPIC && !isNapTransitions);
 
       // Check if we should show flat chapter view
