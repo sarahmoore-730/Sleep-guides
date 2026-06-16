@@ -2781,7 +2781,7 @@
 
       // For 0-3m, 4-5m, and 6-17m, flatten chapters from all guides (deduplicated)
       const flattenedChapters = useMemo(() => {
-        if (selectedCategory !== '4-5m' && selectedCategory !== '0-3m' && selectedCategory !== '6-17m') return null;
+        if (selectedCategory !== '4-5m' && selectedCategory !== '0-3m' && selectedCategory !== '6-17m' && selectedCategory !== '18m-3y') return null;
         const chapters = [];
         const seenIds = new Set();
         guides.forEach(guide => {
@@ -2824,7 +2824,7 @@
         (browseMode === BROWSE_MODES.TOPIC && !isNapTransitions);
 
       // Check if we should show flat chapter view
-      const showChapterView = (selectedCategory === '4-5m' || selectedCategory === '0-3m' || selectedCategory === '6-17m') && flattenedChapters && flattenedChapters.length > 0;
+      const showChapterView = (selectedCategory === '4-5m' || selectedCategory === '0-3m' || selectedCategory === '6-17m' || selectedCategory === '18m-3y') && flattenedChapters && flattenedChapters.length > 0;
 
       return (
         <div className="page">
